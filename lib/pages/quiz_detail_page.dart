@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:celoe_lms_app/pages/quiz_question_page.dart';
 
 class QuizDetailPage extends StatelessWidget {
   const QuizDetailPage({super.key});
@@ -32,7 +33,7 @@ class QuizDetailPage extends StatelessWidget {
           const SizedBox(height: 20),
           _finalScore(),
           const SizedBox(height: 20),
-          _actionButtons(),
+          _actionButtons(context),
         ],
       ),
     );
@@ -149,11 +150,16 @@ class QuizDetailPage extends StatelessWidget {
   }
 
   // ================= BUTTONS =================
-  Widget _actionButtons() {
+  Widget _actionButtons(BuildContext context) {
     return Column(
       children: [
         OutlinedButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => const QuizQuestionPage()),
+            );
+          },
           style: OutlinedButton.styleFrom(
             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
             shape: RoundedRectangleBorder(
