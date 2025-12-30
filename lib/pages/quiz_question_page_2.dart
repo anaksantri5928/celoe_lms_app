@@ -9,7 +9,7 @@ class QuizQuestionPage2 extends StatefulWidget {
 }
 
 class _QuizQuestionPage2State extends State<QuizQuestionPage2> {
-  static const primaryRed = Color(0xFFB71C1C);
+  static const primaryRed = Color(0xFFB74848);
 
   int? selectedOption = 2; // C. Konsistensi
 

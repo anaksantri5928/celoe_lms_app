@@ -4,7 +4,7 @@ import 'package:celoe_lms_app/widgets/upload_file_bottom_sheet.dart';
 class TugasDetailPage extends StatelessWidget {
   const TugasDetailPage({super.key});
 
-  static const primaryRed = Color(0xFFB71C1C);
+  static const primaryRed = Color(0xFFB74848);
 
   @override
   Widget build(BuildContext context) {

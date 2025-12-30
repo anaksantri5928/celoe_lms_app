@@ -9,7 +9,7 @@ class QuizQuestionPage3 extends StatefulWidget {
 }
 
 class _QuizQuestionPage3State extends State<QuizQuestionPage3> {
-  static const primaryRed = Color(0xFFB71C1C);
+  static const primaryRed = Color(0xFFB74848);
 
   int? selectedOption = 0; // A. Jenis Kelamin (contoh terpilih)
 

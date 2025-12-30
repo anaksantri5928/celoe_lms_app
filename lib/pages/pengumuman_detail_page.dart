@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class PengumumanDetailPage extends StatelessWidget {
   const PengumumanDetailPage({super.key});
 
-  static const primaryRed = Color(0xFFB71C1C);
+  static const primaryRed = Color(0xFFB74848);
 
   @override
   Widget build(BuildContext context) {

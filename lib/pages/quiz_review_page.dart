@@ -5,7 +5,7 @@ import 'package:celoe_lms_app/pages/quiz_detail_page.dart';
 class QuizReviewPage extends StatelessWidget {
   const QuizReviewPage({super.key});
 
-  static const primaryRed = Color(0xFFB71C1C);
+  static const primaryRed = Color(0xFFB74848);
 
   @override
   Widget build(BuildContext context) {

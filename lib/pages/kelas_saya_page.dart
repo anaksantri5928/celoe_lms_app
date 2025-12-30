@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class KelasSayaPage extends StatelessWidget {
   const KelasSayaPage({super.key});
 
-  static const primaryRed = Color(0xFFB71C1C);
+  static const primaryRed = Color(0xFFB74848);
 
   @override
   Widget build(BuildContext context) {
@@ -21,10 +21,7 @@ class KelasSayaPage extends StatelessWidget {
         centerTitle: true,
         title: const Text(
           'Kelas Saya',
-          style: TextStyle(
-            color: Colors.black,
-            fontWeight: FontWeight.bold,
-          ),
+          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
         ),
       ),
 
@@ -77,10 +74,7 @@ class KelasSayaPage extends StatelessWidget {
         selectedItemColor: Colors.white,
         unselectedItemColor: Colors.white70,
         items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(
             icon: Icon(Icons.school),
             label: 'Kelas Saya',
@@ -113,11 +107,7 @@ class KelasSayaPage extends StatelessWidget {
               color: Colors.grey.shade200,
               borderRadius: BorderRadius.circular(8),
             ),
-            child: const Icon(
-              Icons.broken_image,
-              size: 40,
-              color: Colors.grey,
-            ),
+            child: const Icon(Icons.broken_image, size: 40, color: Colors.grey),
           ),
 
           const SizedBox(width: 12),
@@ -129,10 +119,7 @@ class KelasSayaPage extends StatelessWidget {
               children: [
                 const Text(
                   '2021/2',
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: Colors.grey,
-                  ),
+                  style: TextStyle(fontSize: 12, color: Colors.grey),
                 ),
                 const SizedBox(height: 4),
                 Text(
@@ -145,10 +132,7 @@ class KelasSayaPage extends StatelessWidget {
                 const SizedBox(height: 2),
                 Text(
                   subtitle,
-                  style: const TextStyle(
-                    fontSize: 12,
-                    color: Colors.grey,
-                  ),
+                  style: const TextStyle(fontSize: 12, color: Colors.grey),
                 ),
                 const SizedBox(height: 8),
 
@@ -166,10 +150,7 @@ class KelasSayaPage extends StatelessWidget {
                 const SizedBox(height: 4),
                 Text(
                   '${(progress * 100).toInt()} % Selesai',
-                  style: const TextStyle(
-                    fontSize: 12,
-                    color: Colors.grey,
-                  ),
+                  style: const TextStyle(fontSize: 12, color: Colors.grey),
                 ),
               ],
             ),

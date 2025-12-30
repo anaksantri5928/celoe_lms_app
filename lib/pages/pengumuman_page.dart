@@ -4,7 +4,7 @@ import 'package:celoe_lms_app/pages/pengumuman_detail_page.dart';
 class PengumumanPage extends StatelessWidget {
   const PengumumanPage({super.key});
 
-  static const primaryRed = Color(0xFFB71C1C);
+  static const primaryRed = Color(0xFFB74848);
 
   @override
   Widget build(BuildContext context) {

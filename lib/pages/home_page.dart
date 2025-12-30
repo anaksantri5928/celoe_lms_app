@@ -8,7 +8,7 @@ import 'package:celoe_lms_app/pages/kelas_dashboard_page.dart';
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
-  static const primaryRed = Color(0xFFB71C1C);
+  static const primaryRed = Color(0xFFB74848);
 
   @override
   Widget build(BuildContext context) {

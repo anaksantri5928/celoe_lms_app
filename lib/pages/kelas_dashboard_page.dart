@@ -10,7 +10,7 @@ class KelasDashboardPage extends StatefulWidget {
 }
 
 class _KelasDashboardPageState extends State<KelasDashboardPage> {
-  static const primaryRed = Color(0xFFB71C1C);
+  static const primaryRed = Color(0xFFB74848);
   int _activeTab = 0; // 0 = Materi, 1 = Tugas & Kuis
 
   @override

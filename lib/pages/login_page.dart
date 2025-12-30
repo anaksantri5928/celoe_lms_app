@@ -22,10 +22,7 @@ class _LoginPageState extends State<LoginPage> {
           SizedBox(
             height: 300,
             width: double.infinity,
-            child: Image.asset(
-              'assets/header.jpg',
-              fit: BoxFit.cover,
-            ),
+            child: Image.asset('assets/header.jpg', fit: BoxFit.cover),
           ),
 
           /// WHITE CURVE OVER IMAGE
@@ -35,10 +32,7 @@ class _LoginPageState extends State<LoginPage> {
             right: 0,
             child: ClipPath(
               clipper: TopWaveClipper(),
-              child: Container(
-                height: 120,
-                color: Colors.white,
-              ),
+              child: Container(height: 120, color: Colors.white),
             ),
           ),
 
@@ -50,7 +44,7 @@ class _LoginPageState extends State<LoginPage> {
             child: Center(
               child: CircleAvatar(
                 radius: 32,
-                backgroundColor: const Color(0xFFB71C1C),
+                backgroundColor: const Color(0xFFB74848),
                 child: const Icon(
                   Icons.lock_outline,
                   color: Colors.white,
@@ -89,7 +83,7 @@ class _LoginPageState extends State<LoginPage> {
                           labelText: 'Email 365',
                           focusedBorder: UnderlineInputBorder(
                             borderSide: BorderSide(
-                              color: Color(0xFFB71C1C),
+                              color: Color(0xFFB74848),
                               width: 2,
                             ),
                           ),
@@ -105,7 +99,7 @@ class _LoginPageState extends State<LoginPage> {
                           labelText: 'Password',
                           focusedBorder: const UnderlineInputBorder(
                             borderSide: BorderSide(
-                              color: Color(0xFFB71C1C),
+                              color: Color(0xFFB74848),
                               width: 2,
                             ),
                           ),
@@ -132,7 +126,7 @@ class _LoginPageState extends State<LoginPage> {
                         height: 48,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0xFFB71C1C),
+                            backgroundColor: const Color(0xFFB74848),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(24),
                             ),
@@ -164,9 +158,7 @@ class _LoginPageState extends State<LoginPage> {
                           },
                           child: const Text(
                             'Bantuan ?',
-                            style: TextStyle(
-                              color: Color(0xFFB71C1C),
-                            ),
+                            style: TextStyle(color: Color(0xFFB74848)),
                           ),
                         ),
                       ),
@@ -186,10 +178,7 @@ class _LoginPageState extends State<LoginPage> {
             right: 0,
             child: ClipPath(
               clipper: BottomWaveClipper(),
-              child: Container(
-                height: 140,
-                color: const Color(0xFFB71C1C),
-              ),
+              child: Container(height: 140, color: const Color(0xFFB74848)),
             ),
           ),
         ],
@@ -198,18 +187,12 @@ class _LoginPageState extends State<LoginPage> {
   }
 }
 
-
 class TopWaveClipper extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
     Path path = Path();
     path.lineTo(0, 40);
-    path.quadraticBezierTo(
-      size.width / 2,
-      0,
-      size.width,
-      40,
-    );
+    path.quadraticBezierTo(size.width / 2, 0, size.width, 40);
     path.lineTo(size.width, size.height);
     path.lineTo(0, size.height);
     return path;
@@ -224,12 +207,7 @@ class BottomWaveClipper extends CustomClipper<Path> {
   Path getClip(Size size) {
     Path path = Path();
     path.moveTo(0, 80);
-    path.quadraticBezierTo(
-      size.width / 2,
-      0,
-      size.width,
-      40,
-    );
+    path.quadraticBezierTo(size.width / 2, 0, size.width, 40);
     path.lineTo(size.width, size.height);
     path.lineTo(0, size.height);
     return path;

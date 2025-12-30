@@ -9,7 +9,7 @@ class QuizQuestionPage extends StatefulWidget {
 }
 
 class _QuizQuestionPageState extends State<QuizQuestionPage> {
-  static const primaryRed = Color(0xFFB71C1C);
+  static const primaryRed = Color(0xFFB74848);
 
   int currentQuestion = 1;
   int totalQuestion = 15;
@@ -33,10 +33,7 @@ class _QuizQuestionPageState extends State<QuizQuestionPage> {
         backgroundColor: primaryRed,
         elevation: 0,
         centerTitle: true,
-        title: const Text(
-          'Quiz Review 1',
-          style: TextStyle(fontSize: 14),
-        ),
+        title: const Text('Quiz Review 1', style: TextStyle(fontSize: 14)),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 16),
@@ -44,10 +41,7 @@ class _QuizQuestionPageState extends State<QuizQuestionPage> {
               children: const [
                 Icon(Icons.alarm, size: 18),
                 SizedBox(width: 4),
-                Text(
-                  '15 : 00',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
+                Text('15 : 00', style: TextStyle(fontWeight: FontWeight.bold)),
               ],
             ),
           ),
@@ -134,8 +128,7 @@ class _QuizQuestionPageState extends State<QuizQuestionPage> {
                 style: TextStyle(
                   fontSize: 12,
                   color: isActive ? Colors.white : Colors.black,
-                  fontWeight:
-                      isActive ? FontWeight.bold : FontWeight.normal,
+                  fontWeight: isActive ? FontWeight.bold : FontWeight.normal,
                 ),
               ),
             ),
