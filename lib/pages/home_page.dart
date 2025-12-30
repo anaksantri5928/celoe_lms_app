@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:celoe_lms_app/pages/profile_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -17,10 +18,7 @@ class HomePage extends StatelessWidget {
         unselectedItemColor: Colors.white70,
         backgroundColor: primaryRed,
         items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(
             icon: Icon(Icons.school),
             label: 'Kelas Saya',
@@ -36,7 +34,7 @@ class HomePage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _header(),
+            _header(context),
 
             const SizedBox(height: 16),
 
@@ -64,7 +62,7 @@ class HomePage extends StatelessWidget {
   }
 
   // ================= HEADER =================
-  Widget _header() {
+  Widget _header(BuildContext context) {
     return Container(
       padding: const EdgeInsets.fromLTRB(16, 48, 16, 24),
       decoration: const BoxDecoration(
@@ -80,10 +78,7 @@ class HomePage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: const [
-                Text(
-                  'Hallo,',
-                  style: TextStyle(color: Colors.white70),
-                ),
+                Text('Hallo,', style: TextStyle(color: Colors.white70)),
                 SizedBox(height: 4),
                 Text(
                   'DANDY CANDRA PRATAMA',
@@ -95,33 +90,37 @@ class HomePage extends StatelessWidget {
               ],
             ),
           ),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-            decoration: BoxDecoration(
-              color: Colors.red.shade800,
-              borderRadius: BorderRadius.circular(16),
-            ),
-            child: Row(
-              children: const [
-                Text(
-                  'MAHASISWA',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 12,
-                    fontWeight: FontWeight.bold,
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const ProfilePage()),
+              );
+            },
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+              decoration: BoxDecoration(
+                color: Colors.red.shade800,
+                borderRadius: BorderRadius.circular(16),
+              ),
+              child: Row(
+                children: const [
+                  Text(
+                    'MAHASISWA',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
-                SizedBox(width: 6),
-                CircleAvatar(
-                  radius: 10,
-                  backgroundColor: Colors.white,
-                  child: Icon(
-                    Icons.person,
-                    size: 14,
-                    color: primaryRed,
+                  SizedBox(width: 6),
+                  CircleAvatar(
+                    radius: 10,
+                    backgroundColor: Colors.white,
+                    child: Icon(Icons.person, size: 14, color: primaryRed),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ],
@@ -135,10 +134,7 @@ class HomePage extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Text(
         title,
-        style: const TextStyle(
-          fontSize: 16,
-          fontWeight: FontWeight.bold,
-        ),
+        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
       ),
     );
   }
@@ -169,10 +165,7 @@ class HomePage extends StatelessWidget {
               style: TextStyle(color: Colors.white70),
             ),
             SizedBox(height: 16),
-            Text(
-              'Waktu Pengumpulan',
-              style: TextStyle(color: Colors.white70),
-            ),
+            Text('Waktu Pengumpulan', style: TextStyle(color: Colors.white70)),
             SizedBox(height: 4),
             Text(
               'Jumat 26 Februari, 23:59 WIB',
@@ -217,11 +210,7 @@ class HomePage extends StatelessWidget {
           borderRadius: BorderRadius.circular(12),
         ),
         child: const Center(
-          child: Icon(
-            Icons.image_not_supported,
-            size: 48,
-            color: Colors.grey,
-          ),
+          child: Icon(Icons.image_not_supported, size: 48, color: Colors.grey),
         ),
       ),
     );
@@ -231,7 +220,11 @@ class HomePage extends StatelessWidget {
   Widget _progressList() {
     return Column(
       children: [
-        _progressItem('UI / UX', 'DESAIN ANTARMUKA & PENGALAMAN PENGGUNA', 0.89),
+        _progressItem(
+          'UI / UX',
+          'DESAIN ANTARMUKA & PENGALAMAN PENGGUNA',
+          0.89,
+        ),
         _progressItem('PKN', 'KEWARGANEGARAAN', 0.86),
         _progressItem('SO', 'SISTEM OPERASI', 0.90),
         _progressItem('PMM', 'PEMROGRAMAN PERANGKAT BERGERAK MULTIMEDIA', 0.90),
@@ -272,8 +265,10 @@ class HomePage extends StatelessWidget {
                   backgroundColor: Colors.grey.shade300,
                 ),
                 const SizedBox(height: 4),
-                Text('${(progress * 100).toInt()} % Selesai',
-                    style: const TextStyle(fontSize: 12)),
+                Text(
+                  '${(progress * 100).toInt()} % Selesai',
+                  style: const TextStyle(fontSize: 12),
+                ),
               ],
             ),
           ),
