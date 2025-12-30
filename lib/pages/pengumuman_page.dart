@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:celoe_lms_app/pages/pengumuman_detail_page.dart';
 
 class PengumumanPage extends StatelessWidget {
   const PengumumanPage({super.key});
@@ -21,20 +22,25 @@ class PengumumanPage extends StatelessWidget {
         centerTitle: true,
         title: const Text(
           'Pengumuman',
-          style: TextStyle(
-            color: Colors.black,
-            fontWeight: FontWeight.bold,
-          ),
+          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
         ),
       ),
 
       /// BODY
       body: ListView(
         padding: const EdgeInsets.symmetric(vertical: 8),
-        children: const [
-          _PengumumanItem(
-            title: 'Maintenance Pra UAS Semester Genap 2020/2021',
-            meta: 'By Admin Celoe - Rabu, 2 Juni 2021, 10:45',
+        children: [
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const PengumumanDetailPage()),
+              );
+            },
+            child: _PengumumanItem(
+              title: 'Maintenance Pra UAS Semester Genap 2020/2021',
+              meta: 'By Admin Celoe - Rabu, 2 Juni 2021, 10:45',
+            ),
           ),
           _PengumumanItem(
             title: 'Pengumuman Maintenance',
@@ -54,10 +60,7 @@ class PengumumanPage extends StatelessWidget {
         selectedItemColor: Colors.white,
         unselectedItemColor: Colors.white70,
         items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(
             icon: Icon(Icons.school),
             label: 'Kelas Saya',
@@ -78,10 +81,7 @@ class _PengumumanItem extends StatelessWidget {
   final String title;
   final String meta;
 
-  const _PengumumanItem({
-    required this.title,
-    required this.meta,
-  });
+  const _PengumumanItem({required this.title, required this.meta});
 
   @override
   Widget build(BuildContext context) {
@@ -90,11 +90,7 @@ class _PengumumanItem extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Icon(
-            Icons.campaign,
-            size: 22,
-            color: Colors.black,
-          ),
+          const Icon(Icons.campaign, size: 22, color: Colors.black),
           const SizedBox(width: 12),
           Expanded(
             child: Column(
@@ -110,10 +106,7 @@ class _PengumumanItem extends StatelessWidget {
                 const SizedBox(height: 6),
                 Text(
                   meta,
-                  style: const TextStyle(
-                    fontSize: 11,
-                    color: Colors.grey,
-                  ),
+                  style: const TextStyle(fontSize: 11, color: Colors.grey),
                 ),
               ],
             ),
