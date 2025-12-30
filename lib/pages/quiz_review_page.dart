@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:celoe_lms_app/pages/quiz_review_detail_page.dart';
 
 class QuizReviewPage extends StatelessWidget {
   const QuizReviewPage({super.key});
@@ -23,43 +24,50 @@ class QuizReviewPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _infoCard(),
+            _infoCard(context),
             const SizedBox(height: 24),
             _questionItem(
+              context: context,
               number: 1,
               question: 'Radio button dapat digunakan untuk menentukan ?',
               answer: 'A. Jenis Kelamin',
             ),
             _questionItem(
+              context: context,
               number: 2,
               question:
                   'Dalam perancangan web yang baik, untuk teks yang menyampaikan isi konten digunakan font yang sama di setiap halaman, ini merupakan salah satu tujuan yaitu ?',
               answer: 'B. Konsistensi',
             ),
             _questionItem(
+              context: context,
               number: 3,
               question:
                   'Dalam perancangan web yang baik, untuk teks yang menyampaikan isi konten digunakan font yang sama di setiap halaman, ini merupakan salah satu tujuan yaitu ?',
               answer: 'C. Konsistensi',
             ),
             _questionItem(
+              context: context,
               number: 4,
               question: 'Radio button dapat digunakan untuk menentukan ?',
               answer: 'A. Jenis Kelamin',
             ),
             _questionItem(
+              context: context,
               number: 5,
               question:
                   'Dalam perancangan web yang baik, untuk teks yang menyampaikan isi konten digunakan font yang sama di setiap halaman, ini merupakan salah satu tujuan yaitu ?',
               answer: 'C. Konsistensi',
             ),
             _questionItem(
+              context: context,
               number: 6,
               question:
                   'Dalam perancangan web yang baik, untuk teks yang menyampaikan isi konten digunakan font yang sama di setiap halaman, ini merupakan salah satu tujuan yaitu ?',
               answer: 'C. Konsistensi',
             ),
             _questionItem(
+              context: context,
               number: 7,
               question: 'Radio button dapat digunakan untuk menentukan ?',
               answer: 'A. Jenis Kelamin',
@@ -94,7 +102,7 @@ class QuizReviewPage extends StatelessWidget {
   }
 
   // ================= INFO CARD =================
-  Widget _infoCard() {
+  Widget _infoCard(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -118,6 +126,7 @@ class QuizReviewPage extends StatelessWidget {
 
   // ================= QUESTION ITEM =================
   Widget _questionItem({
+    required BuildContext context,
     required int number,
     required String question,
     required String answer,
@@ -148,7 +157,12 @@ class QuizReviewPage extends StatelessWidget {
               ),
               TextButton(
                 onPressed: () {
-                  // TODO: lihat soal
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const QuizReviewDetailPage(),
+                    ),
+                  );
                 },
                 child: const Text('Lihat Soal', style: TextStyle(fontSize: 12)),
               ),
