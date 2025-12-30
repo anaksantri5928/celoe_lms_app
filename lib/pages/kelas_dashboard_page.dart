@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:celoe_lms_app/pages/materi_sheet_page.dart';
+import 'package:celoe_lms_app/pages/materi_konsep_uid_page.dart';
 
 class KelasDashboardPage extends StatefulWidget {
   const KelasDashboardPage({super.key});
@@ -107,11 +108,18 @@ class _KelasDashboardPageState extends State<KelasDashboardPage> {
             );
           },
         ),
-        const _MateriCard(
+        _MateriCard(
           pertemuan: 'Pertemuan 2',
           title: '02 - Konsep User Interface Design',
           info: '2 URLs, 1 Kuis, 3 Files, 1 Tugas',
           done: true,
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (_) => const MateriKonsepUIDPage()),
+            );
+          },
         ),
         const _MateriCard(
           pertemuan: 'Pertemuan 3',
