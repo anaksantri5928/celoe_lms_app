@@ -163,6 +163,7 @@ class HomePage extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Container(
+        width: double.infinity, // ✅ INI KUNCI
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           color: primaryRed,
