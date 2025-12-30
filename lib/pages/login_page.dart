@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:celoe_lms_app/widgets/help_bottom_sheet.dart';
+import 'package:celoe_lms_app/pages/home_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -136,7 +137,14 @@ class _LoginPageState extends State<LoginPage> {
                               borderRadius: BorderRadius.circular(24),
                             ),
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const HomePage(),
+                              ),
+                            );
+                          },
                           child: const Text(
                             'Log In',
                             style: TextStyle(
