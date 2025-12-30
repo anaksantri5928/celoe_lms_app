@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:celoe_lms_app/pages/tugas_detail_page.dart';
+import 'package:celoe_lms_app/pages/quiz_detail_page.dart';
 
 class MateriKonsepUIDPage extends StatefulWidget {
   const MateriKonsepUIDPage({super.key});
@@ -112,15 +113,22 @@ class _MateriKonsepUIDPageState extends State<MateriKonsepUIDPage> {
     return ListView(
       padding: const EdgeInsets.all(16),
       children: [
-        _TugasKuisDetailCard(
-          isQuiz: true,
-          title: 'Quiz Review 01',
-          description:
-              'Silahkan kerjakan kuis ini dalam waktu 15 menit sebagai nilai '
-              'pertama komponen kuis. Jangan lupa klik tombol Submit Answer '
-              'setelah menjawab seluruh pertanyaan.\n\n'
-              'Kerjakan sebelum hari Jumat, 26 Februari 2021 jam 23:59 WIB.',
-          done: true,
+        GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const QuizDetailPage()),
+            );
+          },
+          child: _TugasKuisDetailCard(
+            isQuiz: true,
+            title: 'Kuis 01 – Konsep User Interface Design',
+            description:
+                'Kuis ini berisi pertanyaan-pertanyaan seputar konsep dasar '
+                'User Interface Design yang telah dipelajari pada materi sebelumnya. '
+                'Pastikan untuk menjawab semua pertanyaan dengan benar.',
+            done: true,
+          ),
         ),
         GestureDetector(
           onTap: () {
