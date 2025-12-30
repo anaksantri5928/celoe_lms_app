@@ -19,51 +19,59 @@ class _LoginPageState extends State<LoginPage> {
         children: [
           /// HEADER IMAGE
           SizedBox(
-            height: 280,
+            height: 300,
             width: double.infinity,
             child: Image.asset(
-              'assets/header.png',
+              'assets/header.jpg',
               fit: BoxFit.cover,
             ),
           ),
 
-          /// CONTENT
+          /// WHITE CURVE OVER IMAGE
+          Positioned(
+            top: 220,
+            left: 0,
+            right: 0,
+            child: ClipPath(
+              clipper: TopWaveClipper(),
+              child: Container(
+                height: 120,
+                color: Colors.white,
+              ),
+            ),
+          ),
+
+          /// LOGO (FLOATING)
+          Positioned(
+            top: 250,
+            left: 0,
+            right: 0,
+            child: Center(
+              child: CircleAvatar(
+                radius: 32,
+                backgroundColor: const Color(0xFFB71C1C),
+                child: const Icon(
+                  Icons.lock_outline,
+                  color: Colors.white,
+                  size: 30,
+                ),
+              ),
+            ),
+          ),
+
+          /// FORM CONTENT
           SingleChildScrollView(
             child: Column(
               children: [
-                const SizedBox(height: 230),
+                const SizedBox(height: 300),
 
-                /// LOGIN CARD
-                Container(
-                  width: double.infinity,
+                Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24),
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.vertical(
-                      top: Radius.circular(32),
-                    ),
-                  ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const SizedBox(height: 50),
+                      const SizedBox(height: 32),
 
-                      /// LOGO
-                      Center(
-                        child: CircleAvatar(
-                          radius: 30,
-                          backgroundColor: const Color(0xFFB71C1C),
-                          child: const Icon(
-                            Icons.lock_outline,
-                            color: Colors.white,
-                            size: 30,
-                          ),
-                        ),
-                      ),
-
-                      const SizedBox(height: 24),
-
-                      /// TITLE
                       const Text(
                         'Login',
                         style: TextStyle(
@@ -74,34 +82,37 @@ class _LoginPageState extends State<LoginPage> {
 
                       const SizedBox(height: 24),
 
-                      /// EMAIL FIELD
-                      TextField(
-                        decoration: const InputDecoration(
+                      /// EMAIL
+                      const TextField(
+                        decoration: InputDecoration(
                           labelText: 'Email 365',
-                          border: UnderlineInputBorder(),
                           focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Color(0xFFB71C1C)),
+                            borderSide: BorderSide(
+                              color: Color(0xFFB71C1C),
+                              width: 2,
+                            ),
                           ),
                         ),
                       ),
 
                       const SizedBox(height: 20),
 
-                      /// PASSWORD FIELD
+                      /// PASSWORD
                       TextField(
                         obscureText: _obscurePassword,
                         decoration: InputDecoration(
                           labelText: 'Password',
-                          border: const UnderlineInputBorder(),
                           focusedBorder: const UnderlineInputBorder(
-                            borderSide: BorderSide(color: Color(0xFFB71C1C)),
+                            borderSide: BorderSide(
+                              color: Color(0xFFB71C1C),
+                              width: 2,
+                            ),
                           ),
                           suffixIcon: IconButton(
                             icon: Icon(
                               _obscurePassword
                                   ? Icons.visibility_off
                                   : Icons.visibility,
-                              color: Colors.grey,
                             ),
                             onPressed: () {
                               setState(() {
@@ -129,7 +140,6 @@ class _LoginPageState extends State<LoginPage> {
                           child: const Text(
                             'Log In',
                             style: TextStyle(
-                              fontSize: 16,
                               fontWeight: FontWeight.bold,
                               color: Colors.white,
                             ),
@@ -137,9 +147,8 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
 
-                      const SizedBox(height: 16),
+                      const SizedBox(height: 12),
 
-                      /// HELP
                       Center(
                         child: TextButton(
                           onPressed: () {
@@ -154,7 +163,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
 
-                      const SizedBox(height: 80),
+                      const SizedBox(height: 120),
                     ],
                   ),
                 ),
@@ -162,18 +171,16 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ),
 
-          /// BOTTOM WAVE
+          /// BOTTOM RED WAVE
           Positioned(
             bottom: 0,
             left: 0,
             right: 0,
-            child: Container(
-              height: 120,
-              decoration: const BoxDecoration(
-                color: Color(0xFFB71C1C),
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(120),
-                ),
+            child: ClipPath(
+              clipper: BottomWaveClipper(),
+              child: Container(
+                height: 140,
+                color: const Color(0xFFB71C1C),
               ),
             ),
           ),
@@ -181,4 +188,45 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
+}
+
+
+class TopWaveClipper extends CustomClipper<Path> {
+  @override
+  Path getClip(Size size) {
+    Path path = Path();
+    path.lineTo(0, 40);
+    path.quadraticBezierTo(
+      size.width / 2,
+      0,
+      size.width,
+      40,
+    );
+    path.lineTo(size.width, size.height);
+    path.lineTo(0, size.height);
+    return path;
+  }
+
+  @override
+  bool shouldReclip(CustomClipper<Path> oldClipper) => false;
+}
+
+class BottomWaveClipper extends CustomClipper<Path> {
+  @override
+  Path getClip(Size size) {
+    Path path = Path();
+    path.moveTo(0, 40);
+    path.quadraticBezierTo(
+      size.width / 2,
+      0,
+      size.width,
+      40,
+    );
+    path.lineTo(size.width, size.height);
+    path.lineTo(0, size.height);
+    return path;
+  }
+
+  @override
+  bool shouldReclip(CustomClipper<Path> oldClipper) => false;
 }
