@@ -8,7 +8,7 @@ class MateriKonsepUIDPage extends StatefulWidget {
 }
 
 class _MateriKonsepUIDPageState extends State<MateriKonsepUIDPage> {
-  int _activeTab = 0; // 0 = Lampiran Materi, 1 = Tugas dan Kuis
+  int _activeTab = 1; // 0 = Lampiran Materi, 1 = Tugas dan Kuis
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +52,10 @@ class _MateriKonsepUIDPageState extends State<MateriKonsepUIDPage> {
       child: const Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Deskripsi', style: TextStyle(fontWeight: FontWeight.bold)),
+          Text(
+            'Deskripsi',
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
           SizedBox(height: 8),
           Text(
             'Konsep dasar User Interface Design akan dipelajari bagaimana '
@@ -96,45 +99,42 @@ class _MateriKonsepUIDPageState extends State<MateriKonsepUIDPage> {
   // ================= TAB CONTENT =================
   Widget _tabContent() {
     if (_activeTab == 0) {
-      return _lampiranMateriTab();
+      return const Center(
+        child: Text(
+          'Lampiran Materi (lihat tab sebelumnya)',
+          style: TextStyle(color: Colors.grey),
+        ),
+      );
     }
-    return const Center(
-      child: Text(
-        'Tugas dan Kuis (Coming Soon)',
-        style: TextStyle(color: Colors.grey),
-      ),
-    );
+    return _tugasDanKuisTab();
   }
 
-  // ================= LAMPIRAN MATERI =================
-  Widget _lampiranMateriTab() {
+  // ================= TUGAS & KUIS TAB =================
+  Widget _tugasDanKuisTab() {
     return ListView(
       padding: const EdgeInsets.all(16),
       children: const [
-        _LampiranItem(
-          icon: Icons.link,
-          title: 'Zoom Meeting Synchronous',
+        _TugasKuisDetailCard(
+          isQuiz: true,
+          title: 'Quiz Review 01',
+          description:
+              'Silahkan kerjakan kuis ini dalam waktu 15 menit sebagai nilai '
+              'pertama komponen kuis. Jangan lupa klik tombol Submit Answer '
+              'setelah menjawab seluruh pertanyaan.\n\n'
+              'Kerjakan sebelum hari Jumat, 26 Februari 2021 jam 23:59 WIB.',
           done: true,
         ),
-        _LampiranItem(
-          icon: Icons.description_outlined,
-          title: 'Elemen-elemen Antarmuka Pengguna',
-          done: true,
-        ),
-        _LampiranItem(
-          icon: Icons.description_outlined,
-          title: 'UID Guidelines and Principles',
-          done: true,
-        ),
-        _LampiranItem(
-          icon: Icons.description_outlined,
-          title: 'User Profile',
-          done: true,
-        ),
-        _LampiranItem(
-          icon: Icons.link,
-          title: 'Principles of User Interface Design URL',
-          done: true,
+        _TugasKuisDetailCard(
+          isQuiz: false,
+          title: 'Tugas 01 – UID Android Mobile Game',
+          description:
+              '1. Buatlah desain tampilan (antarmuka) pada aplikasi mobile '
+              'game FPS (First Person Shooter) yang akan menjadi tugas '
+              'pada mata kuliah Pemrograman Aplikasi Permainan.\n'
+              '2. Desain yang dibuat harus melengkapi seluruh tampilan '
+              'pada aplikasi/game, dari pertama kali aplikasi dijalankan '
+              'hingga proses utama permainan.',
+          done: false,
         ),
       ],
     );
@@ -166,42 +166,95 @@ class _TabButton extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 4),
-          if (active) Container(width: 36, height: 2, color: Colors.black),
+          if (active)
+            Container(
+              width: 36,
+              height: 2,
+              color: Colors.black,
+            ),
         ],
       ),
     );
   }
 }
 
-/// ================= LAMPIRAN ITEM =================
-class _LampiranItem extends StatelessWidget {
-  final IconData icon;
+/// ================= TUGAS / KUIS DETAIL CARD =================
+class _TugasKuisDetailCard extends StatelessWidget {
+  final bool isQuiz;
   final String title;
+  final String description;
   final bool done;
 
-  const _LampiranItem({
-    required this.icon,
+  const _TugasKuisDetailCard({
+    required this.isQuiz,
     required this.title,
+    required this.description,
     required this.done,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 12),
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+      margin: const EdgeInsets.only(bottom: 16),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(24),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: Colors.grey.shade300),
       ),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Icon(icon, size: 20),
-          const SizedBox(width: 12),
-          Expanded(child: Text(title, style: const TextStyle(fontSize: 13))),
-          Icon(
-            done ? Icons.check_circle : Icons.check_circle_outline,
-            color: done ? Colors.green : Colors.grey,
+          /// ICON
+          Container(
+            width: 56,
+            padding: const EdgeInsets.only(top: 16),
+            alignment: Alignment.topCenter,
+            child: Icon(
+              isQuiz ? Icons.quiz_outlined : Icons.assignment_outlined,
+              size: 26,
+            ),
+          ),
+
+          /// CONTENT
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(0, 16, 16, 16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  /// TITLE + STATUS
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          title,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      Icon(
+                        done
+                            ? Icons.check_circle
+                            : Icons.check_circle_outline,
+                        color: done ? Colors.green : Colors.grey,
+                      ),
+                    ],
+                  ),
+
+                  const SizedBox(height: 8),
+
+                  /// DESCRIPTION
+                  Text(
+                    description,
+                    style: const TextStyle(
+                      fontSize: 12,
+                      height: 1.4,
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ),
         ],
       ),

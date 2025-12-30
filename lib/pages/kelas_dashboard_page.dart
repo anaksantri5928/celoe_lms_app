@@ -39,7 +39,7 @@ class _KelasDashboardPageState extends State<KelasDashboardPage> {
         ],
       ),
 
-      /// BOTTOM NAV
+      /// BOTTOM NAVIGATION
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: 1,
         backgroundColor: primaryRed,
@@ -116,8 +116,7 @@ class _KelasDashboardPageState extends State<KelasDashboardPage> {
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(
-                  builder: (_) => const MateriKonsepUIDPage()),
+              MaterialPageRoute(builder: (_) => const MateriKonsepUIDPage()),
             );
           },
         ),
