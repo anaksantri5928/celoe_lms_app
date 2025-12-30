@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:celoe_lms_app/pages/profile_page.dart';
 import 'package:celoe_lms_app/pages/kelas_saya_page.dart';
 import 'package:celoe_lms_app/pages/notifikasi_page.dart';
+import 'package:celoe_lms_app/pages/pengumuman_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -62,7 +63,7 @@ class HomePage extends StatelessWidget {
             const SizedBox(height: 24),
 
             /// PENGUMUMAN
-            _announcementHeader(),
+            _announcementHeader(context),
             _announcementCard(),
 
             const SizedBox(height: 24),
@@ -198,19 +199,27 @@ class HomePage extends StatelessWidget {
   }
 
   // ================= PENGUMUMAN =================
-  Widget _announcementHeader() {
+  Widget _announcementHeader(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: const [
+        children: [
           Text(
             'Pengumuman Terakhir',
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
-          Text(
-            'Lihat Semua',
-            style: TextStyle(color: Colors.blue, fontSize: 12),
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const PengumumanPage()),
+              );
+            },
+            child: Text(
+              'Lihat Semua',
+              style: TextStyle(color: Colors.blue, fontSize: 12),
+            ),
           ),
         ],
       ),
