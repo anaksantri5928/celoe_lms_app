@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:celoe_lms_app/pages/quiz_question_page_1.dart';
 import 'package:celoe_lms_app/pages/quiz_review_page.dart';
+import 'package:celoe_lms_app/pages/kelas_dashboard_page.dart';
 
 class QuizDetailPage extends StatelessWidget {
   const QuizDetailPage({super.key});
@@ -179,7 +180,12 @@ class QuizDetailPage extends StatelessWidget {
         ),
         const SizedBox(height: 12),
         OutlinedButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => const KelasDashboardPage()),
+            );
+          },
           style: OutlinedButton.styleFrom(
             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
             shape: RoundedRectangleBorder(
