@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:celoe_lms_app/pages/quiz_question_page_1.dart';
+import 'package:celoe_lms_app/pages/quiz_review_page.dart';
 
 class QuizDetailPage extends StatelessWidget {
   const QuizDetailPage({super.key});
@@ -29,7 +30,7 @@ class QuizDetailPage extends StatelessWidget {
           const SizedBox(height: 16),
           _quizInfoCard(),
           const SizedBox(height: 20),
-          _attemptSection(),
+          _attemptSection(context),
           const SizedBox(height: 20),
           _finalScore(),
           const SizedBox(height: 20),
@@ -76,7 +77,7 @@ class QuizDetailPage extends StatelessWidget {
   }
 
   // ================= PERCOBAAN =================
-  Widget _attemptSection() {
+  Widget _attemptSection(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -130,7 +131,15 @@ class QuizDetailPage extends StatelessWidget {
               ),
               const Text('85,0', style: TextStyle(fontWeight: FontWeight.bold)),
               const SizedBox(width: 16),
-              TextButton(onPressed: () {}, child: const Text('Lihat')),
+              TextButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => const QuizReviewPage()),
+                  );
+                },
+                child: const Text('Lihat'),
+              ),
             ],
           ),
         ),
