@@ -8,9 +8,16 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  int _activeTab = 1; // 0=About Me | 1=Kelas | 2=Edit Profile
-
   static const primaryRed = Color(0xFFB71C1C);
+
+  int _activeTab = 2; // 0=About Me, 1=Kelas, 2=Edit Profile
+
+  // Controllers (Edit Profile)
+  final TextEditingController firstNameCtrl = TextEditingController();
+  final TextEditingController lastNameCtrl = TextEditingController();
+  final TextEditingController emailCtrl = TextEditingController();
+  final TextEditingController countryCtrl = TextEditingController();
+  final TextEditingController descCtrl = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -118,7 +125,7 @@ class _ProfilePageState extends State<ProfilePage> {
       case 1:
         return _kelasList();
       case 2:
-        return _editProfilePlaceholder();
+        return _editProfileForm();
       default:
         return const SizedBox();
     }
@@ -145,7 +152,7 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  // ================= KELAS LIST =================
+  // ================= KELAS =================
   Widget _kelasList() {
     return Column(
       children: [
@@ -210,14 +217,47 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   // ================= EDIT PROFILE =================
-  Widget _editProfilePlaceholder() {
-    return const Padding(
-      padding: EdgeInsets.all(24),
-      child: Center(
-        child: Text(
-          'Edit Profile (Coming Soon)',
-          style: TextStyle(color: Colors.grey),
-        ),
+  Widget _editProfileForm() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _inputLabel('Nama Pertama'),
+          _textField(firstNameCtrl),
+
+          _inputLabel('Nama Terakhir'),
+          _textField(lastNameCtrl),
+
+          _inputLabel('E-mail Address'),
+          _textField(emailCtrl),
+
+          _inputLabel('Negara'),
+          _textField(countryCtrl),
+
+          _inputLabel('Deskripsi'),
+          _textField(descCtrl, maxLines: 4),
+
+          const SizedBox(height: 24),
+
+          Align(
+            alignment: Alignment.centerRight,
+            child: ElevatedButton(
+              onPressed: null, // disabled (sesuai screenshot)
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.grey.shade200,
+                elevation: 0,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+              ),
+              child: const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 24, vertical: 10),
+                child: Text('Simpan', style: TextStyle(color: Colors.grey)),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -237,6 +277,36 @@ class _ProfilePageState extends State<ProfilePage> {
           label: 'Notifikasi',
         ),
       ],
+    );
+  }
+
+  // ================= HELPERS =================
+  Widget _inputLabel(String text) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 16, bottom: 6),
+      child: Text(text, style: const TextStyle(fontSize: 12)),
+    );
+  }
+
+  Widget _textField(TextEditingController controller, {int maxLines = 1}) {
+    return TextField(
+      controller: controller,
+      maxLines: maxLines,
+      decoration: InputDecoration(
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 12,
+          vertical: 12,
+        ),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(6)),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(6),
+          borderSide: const BorderSide(color: Colors.grey),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(6),
+          borderSide: const BorderSide(color: Colors.grey),
+        ),
+      ),
     );
   }
 }
