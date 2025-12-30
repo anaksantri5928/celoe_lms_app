@@ -1,25 +1,23 @@
 import 'package:flutter/material.dart';
 
-class QuizQuestionPage extends StatefulWidget {
-  const QuizQuestionPage({super.key});
+class QuizQuestionPage2 extends StatefulWidget {
+  const QuizQuestionPage2({super.key});
 
   @override
-  State<QuizQuestionPage> createState() => _QuizQuestionPageState();
+  State<QuizQuestionPage2> createState() => _QuizQuestionPage2State();
 }
 
-class _QuizQuestionPageState extends State<QuizQuestionPage> {
+class _QuizQuestionPage2State extends State<QuizQuestionPage2> {
   static const primaryRed = Color(0xFFB71C1C);
 
-  int currentQuestion = 1;
-  int totalQuestion = 15;
-  int? selectedOption;
+  int? selectedOption = 2; // C. Konsistensi
 
   final List<String> options = [
-    'Jenis Kelamin',
-    'Alamat',
-    'Hobby',
-    'Riwayat Pendidikan',
-    'Umur',
+    'Integrasi',
+    'Standarisasi',
+    'Konsistensi',
+    'Koefensi',
+    'Koreksi',
   ];
 
   @override
@@ -60,41 +58,21 @@ class _QuizQuestionPageState extends State<QuizQuestionPage> {
           children: [
             _questionNavigation(),
             const SizedBox(height: 20),
-            Text(
-              'Soal Nomor $currentQuestion / $totalQuestion',
-              style: const TextStyle(fontWeight: FontWeight.bold),
+            const Text(
+              'Soal Nomor 2 / 15',
+              style: TextStyle(fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 32),
             const Text(
-              'Radio button dapat digunakan untuk menentukan ?',
+              'Dalam perancangan web yang baik, untuk teks yang '
+              'menyampaikan isi konten digunakan font yang sama di '
+              'setiap halaman, ini merupakan salah satu tujuan yaitu ?',
               style: TextStyle(fontSize: 14),
             ),
             const SizedBox(height: 24),
             ..._buildOptions(),
             const Spacer(),
-            Align(
-              alignment: Alignment.centerRight,
-              child: OutlinedButton(
-                onPressed: () {
-                  if (currentQuestion < totalQuestion) {
-                    setState(() {
-                      currentQuestion++;
-                      selectedOption = null;
-                    });
-                  }
-                },
-                style: OutlinedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 20,
-                    vertical: 10,
-                  ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                ),
-                child: const Text('Soal Selanjutnya'),
-              ),
-            ),
+            _navigationButtons(context),
           ],
         ),
       ),
@@ -105,46 +83,40 @@ class _QuizQuestionPageState extends State<QuizQuestionPage> {
   Widget _questionNavigation() {
     return SizedBox(
       height: 36,
-      child: ListView.separated(
+      child: ListView(
         scrollDirection: Axis.horizontal,
-        itemCount: totalQuestion,
-        separatorBuilder: (_, __) => const SizedBox(width: 6),
-        itemBuilder: (context, index) {
-          final number = index + 1;
-          final isActive = number == currentQuestion;
-
-          return GestureDetector(
-            onTap: () {
-              setState(() {
-                currentQuestion = number;
-                selectedOption = null;
-              });
-            },
-            child: Container(
-              width: 32,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                color: isActive ? primaryRed : Colors.white,
-                borderRadius: BorderRadius.circular(16),
-                border: Border.all(color: Colors.grey.shade400),
-              ),
-              child: Text(
-                number.toString(),
-                style: TextStyle(
-                  fontSize: 12,
-                  color: isActive ? Colors.white : Colors.black,
-                  fontWeight:
-                      isActive ? FontWeight.bold : FontWeight.normal,
-                ),
-              ),
-            ),
-          );
-        },
+        children: [
+          _numberCircle(1, Colors.green), // sudah selesai
+          _numberCircle(2, primaryRed),   // aktif
+          for (int i = 3; i <= 15; i++)
+            _numberCircle(i, Colors.white),
+        ],
       ),
     );
   }
 
-  // ================= PILIHAN JAWABAN =================
+  Widget _numberCircle(int number, Color color) {
+    return Container(
+      margin: const EdgeInsets.only(right: 6),
+      width: 32,
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+        color: color,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: Colors.grey.shade400),
+      ),
+      child: Text(
+        number.toString(),
+        style: TextStyle(
+          fontSize: 12,
+          color: color == Colors.white ? Colors.black : Colors.white,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+    );
+  }
+
+  // ================= PILIHAN =================
   List<Widget> _buildOptions() {
     return List.generate(options.length, (index) {
       final isSelected = selectedOption == index;
@@ -185,5 +157,34 @@ class _QuizQuestionPageState extends State<QuizQuestionPage> {
         ),
       );
     });
+  }
+
+  // ================= BUTTON =================
+  Widget _navigationButtons(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        OutlinedButton(
+          onPressed: () => Navigator.pop(context),
+          style: OutlinedButton.styleFrom(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+            ),
+          ),
+          child: const Text('Soal Sebelumnya'),
+        ),
+        OutlinedButton(
+          onPressed: () {
+            // lanjut ke halaman soal 3 (nanti)
+          },
+          style: OutlinedButton.styleFrom(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+            ),
+          ),
+          child: const Text('Soal Selanjutnya'),
+        ),
+      ],
+    );
   }
 }

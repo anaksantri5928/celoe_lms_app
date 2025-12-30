@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:celoe_lms_app/pages/quiz_question_page.dart';
+import 'package:celoe_lms_app/pages/quiz_question_page_1.dart';
 
 class QuizDetailPage extends StatelessWidget {
   const QuizDetailPage({super.key});
