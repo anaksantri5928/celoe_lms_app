@@ -84,55 +84,83 @@ class _KelasDashboardPageState extends State<KelasDashboardPage> {
   // ================= TAB CONTENT =================
   Widget _tabContent() {
     if (_activeTab == 0) {
-      return ListView(
-        padding: const EdgeInsets.all(16),
-        children: const [
-          _MateriCard(
-            pertemuan: 'Pertemuan 1',
-            title: '01 - Pengantar User Interface Design',
-            info: '3 URLs, 2 Files, 3 Interactive Content',
-            done: false,
-          ),
-          _MateriCard(
-            pertemuan: 'Pertemuan 2',
-            title: '02 - Konsep User Interface Design',
-            info: '2 URLs, 1 Kuis, 3 Files, 1 Tugas',
-            done: true,
-          ),
-          _MateriCard(
-            pertemuan: 'Pertemuan 3',
-            title: '03 - Interaksi pada User Interface Design',
-            info: '3 URLs, 2 Files, 3 Interactive Content',
-            done: true,
-          ),
-          _MateriCard(
-            pertemuan: 'Pertemuan 4',
-            title: '04 - Ethnographic Observation',
-            info: '3 URLs, 2 Files, 3 Interactive Content',
-            done: true,
-          ),
-          _MateriCard(
-            pertemuan: 'Pertemuan 5',
-            title: '05 - UID Testing',
-            info: '3 URLs, 2 Files, 3 Interactive Content',
-            done: true,
-          ),
-          _MateriCard(
-            pertemuan: 'Pertemuan 6',
-            title: '06 - Assessment 1',
-            info: '3 URLs, 2 Files, 3 Interactive Content',
-            done: true,
-          ),
-        ],
-      );
+      return _materiTab();
     }
+    return _tugasDanKuisTab();
+  }
 
-    // Placeholder tab Tugas & Kuis
-    return const Center(
-      child: Text(
-        'Tugas dan Kuis (Coming Soon)',
-        style: TextStyle(color: Colors.grey),
-      ),
+  // ================= MATERI TAB =================
+  Widget _materiTab() {
+    return ListView(
+      padding: const EdgeInsets.all(16),
+      children: const [
+        _MateriCard(
+          pertemuan: 'Pertemuan 1',
+          title: '01 - Pengantar User Interface Design',
+          info: '3 URLs, 2 Files, 3 Interactive Content',
+          done: false,
+        ),
+        _MateriCard(
+          pertemuan: 'Pertemuan 2',
+          title: '02 - Konsep User Interface Design',
+          info: '2 URLs, 1 Kuis, 3 Files, 1 Tugas',
+          done: true,
+        ),
+        _MateriCard(
+          pertemuan: 'Pertemuan 3',
+          title: '03 - Interaksi pada User Interface Design',
+          info: '3 URLs, 2 Files, 3 Interactive Content',
+          done: true,
+        ),
+        _MateriCard(
+          pertemuan: 'Pertemuan 4',
+          title: '04 - Ethnographic Observation',
+          info: '3 URLs, 2 Files, 3 Interactive Content',
+          done: true,
+        ),
+        _MateriCard(
+          pertemuan: 'Pertemuan 5',
+          title: '05 - UID Testing',
+          info: '3 URLs, 2 Files, 3 Interactive Content',
+          done: true,
+        ),
+        _MateriCard(
+          pertemuan: 'Pertemuan 6',
+          title: '06 - Assessment 1',
+          info: '3 URLs, 2 Files, 3 Interactive Content',
+          done: true,
+        ),
+      ],
+    );
+  }
+
+  // ================= TUGAS & KUIS TAB =================
+  Widget _tugasDanKuisTab() {
+    return ListView(
+      padding: const EdgeInsets.all(16),
+      children: const [
+        _TugasKuisCard(
+          badge: 'QUIZ',
+          title: 'Quiz Review 01',
+          deadline: 'Tenggat Waktu : 26 Februari 2021 23:59 WIB',
+          done: true,
+          isQuiz: true,
+        ),
+        _TugasKuisCard(
+          badge: 'Tugas',
+          title: 'Tugas 01 – UID Android Mobile Game',
+          deadline: 'Tenggat Waktu : 26 Februari 2021 23:59 WIB',
+          done: false,
+          isQuiz: false,
+        ),
+        _TugasKuisCard(
+          badge: 'Pertemuan 3',
+          title: 'Kuis – Assessment 2',
+          deadline: 'Tenggat Waktu : 26 Februari 2021 23:59 WIB',
+          done: true,
+          isQuiz: true,
+        ),
+      ],
     );
   }
 }
@@ -195,7 +223,6 @@ class _MateriCard extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          /// LEFT
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -227,8 +254,86 @@ class _MateriCard extends StatelessWidget {
               ],
             ),
           ),
+          Icon(
+            done ? Icons.check_circle : Icons.check_circle_outline,
+            color: done ? Colors.green : Colors.grey,
+          ),
+        ],
+      ),
+    );
+  }
+}
 
-          /// RIGHT ICON
+/// ================= TUGAS / KUIS CARD =================
+class _TugasKuisCard extends StatelessWidget {
+  final String badge;
+  final String title;
+  final String deadline;
+  final bool done;
+  final bool isQuiz;
+
+  const _TugasKuisCard({
+    required this.badge,
+    required this.title,
+    required this.deadline,
+    required this.done,
+    required this.isQuiz,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 12),
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 4,
+                  ),
+                  decoration: BoxDecoration(
+                    color: Colors.blue.shade400,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Text(
+                    badge,
+                    style: const TextStyle(color: Colors.white, fontSize: 12),
+                  ),
+                ),
+                const SizedBox(height: 10),
+                Row(
+                  children: [
+                    Icon(
+                      isQuiz ? Icons.quiz_outlined : Icons.assignment_outlined,
+                      size: 20,
+                    ),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: Text(
+                        title,
+                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  deadline,
+                  style: const TextStyle(fontSize: 11, color: Colors.grey),
+                ),
+              ],
+            ),
+          ),
           Icon(
             done ? Icons.check_circle : Icons.check_circle_outline,
             color: done ? Colors.green : Colors.grey,
