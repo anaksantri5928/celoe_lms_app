@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:celoe_lms_app/pages/materi_sheet_page.dart';
 
 class KelasDashboardPage extends StatefulWidget {
   const KelasDashboardPage({super.key});
@@ -93,38 +94,44 @@ class _KelasDashboardPageState extends State<KelasDashboardPage> {
   Widget _materiTab() {
     return ListView(
       padding: const EdgeInsets.all(16),
-      children: const [
+      children: [
         _MateriCard(
           pertemuan: 'Pertemuan 1',
           title: '01 - Pengantar User Interface Design',
           info: '3 URLs, 2 Files, 3 Interactive Content',
           done: false,
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => const MateriSheetPage()),
+            );
+          },
         ),
-        _MateriCard(
+        const _MateriCard(
           pertemuan: 'Pertemuan 2',
           title: '02 - Konsep User Interface Design',
           info: '2 URLs, 1 Kuis, 3 Files, 1 Tugas',
           done: true,
         ),
-        _MateriCard(
+        const _MateriCard(
           pertemuan: 'Pertemuan 3',
           title: '03 - Interaksi pada User Interface Design',
           info: '3 URLs, 2 Files, 3 Interactive Content',
           done: true,
         ),
-        _MateriCard(
+        const _MateriCard(
           pertemuan: 'Pertemuan 4',
           title: '04 - Ethnographic Observation',
           info: '3 URLs, 2 Files, 3 Interactive Content',
           done: true,
         ),
-        _MateriCard(
+        const _MateriCard(
           pertemuan: 'Pertemuan 5',
           title: '05 - UID Testing',
           info: '3 URLs, 2 Files, 3 Interactive Content',
           done: true,
         ),
-        _MateriCard(
+        const _MateriCard(
           pertemuan: 'Pertemuan 6',
           title: '06 - Assessment 1',
           info: '3 URLs, 2 Files, 3 Interactive Content',
@@ -203,62 +210,68 @@ class _MateriCard extends StatelessWidget {
   final String title;
   final String info;
   final bool done;
+  final VoidCallback? onTap;
 
   const _MateriCard({
     required this.pertemuan,
     required this.title,
     required this.info,
     required this.done,
+    this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 12),
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 12,
-                    vertical: 4,
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(12),
+      child: Container(
+        margin: const EdgeInsets.only(bottom: 12),
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 4,
+                    ),
+                    decoration: BoxDecoration(
+                      color: Colors.blue.shade400,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Text(
+                      pertemuan,
+                      style: const TextStyle(color: Colors.white, fontSize: 12),
+                    ),
                   ),
-                  decoration: BoxDecoration(
-                    color: Colors.blue.shade400,
-                    borderRadius: BorderRadius.circular(8),
+                  const SizedBox(height: 8),
+                  Text(
+                    title,
+                    style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
-                  child: Text(
-                    pertemuan,
-                    style: const TextStyle(color: Colors.white, fontSize: 12),
+                  const SizedBox(height: 6),
+                  Text(
+                    info,
+                    style: const TextStyle(fontSize: 12, color: Colors.grey),
                   ),
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  title,
-                  style: const TextStyle(fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(height: 6),
-                Text(
-                  info,
-                  style: const TextStyle(fontSize: 12, color: Colors.grey),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          Icon(
-            done ? Icons.check_circle : Icons.check_circle_outline,
-            color: done ? Colors.green : Colors.grey,
-          ),
-        ],
+            Icon(
+              done ? Icons.check_circle : Icons.check_circle_outline,
+              color: done ? Colors.green : Colors.grey,
+            ),
+          ],
+        ),
       ),
     );
   }
