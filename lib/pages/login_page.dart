@@ -223,7 +223,7 @@ class BottomWaveClipper extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
     Path path = Path();
-    path.moveTo(0, 40);
+    path.moveTo(0, 80);
     path.quadraticBezierTo(
       size.width / 2,
       0,
