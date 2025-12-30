@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:celoe_lms_app/widgets/help_bottom_sheet.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -21,7 +22,7 @@ class _LoginPageState extends State<LoginPage> {
             height: 280,
             width: double.infinity,
             child: Image.asset(
-              'assets/header.jpg',
+              'assets/header.png',
               fit: BoxFit.cover,
             ),
           ),
@@ -141,7 +142,9 @@ class _LoginPageState extends State<LoginPage> {
                       /// HELP
                       Center(
                         child: TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            showHelpBottomSheet(context);
+                          },
                           child: const Text(
                             'Bantuan ?',
                             style: TextStyle(
