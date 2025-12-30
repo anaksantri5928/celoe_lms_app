@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:celoe_lms_app/pages/quiz_review_detail_page.dart';
+import 'package:celoe_lms_app/pages/quiz_detail_page.dart';
 
 class QuizReviewPage extends StatelessWidget {
   const QuizReviewPage({super.key});
@@ -76,7 +77,12 @@ class QuizReviewPage extends StatelessWidget {
             Center(
               child: ElevatedButton(
                 onPressed: () {
-                  // TODO: submit jawaban
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const QuizDetailPage(),
+                    ),
+                  );
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.green,
