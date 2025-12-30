@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
+
+  @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  int _activeTab = 1; // 0=About Me | 1=Kelas | 2=Edit Profile
 
   static const primaryRed = Color(0xFFB71C1C);
 
@@ -10,27 +17,7 @@ class ProfilePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
 
-      /// BOTTOM NAVIGATION
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: 0,
-        backgroundColor: primaryRed,
-        selectedItemColor: Colors.white,
-        unselectedItemColor: Colors.white70,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.school),
-            label: 'Kelas Saya',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.notifications),
-            label: 'Notifikasi',
-          ),
-        ],
-      ),
+      bottomNavigationBar: _bottomNav(),
 
       body: SingleChildScrollView(
         child: Column(
@@ -38,12 +25,8 @@ class ProfilePage extends StatelessWidget {
             _header(context),
             const SizedBox(height: 16),
             _tabCard(),
-            const SizedBox(height: 24),
-            _infoUser(),
-            const SizedBox(height: 24),
-            _loginActivity(),
-            const SizedBox(height: 32),
-            _logoutButton(),
+            const SizedBox(height: 16),
+            _tabContent(),
             const SizedBox(height: 32),
           ],
         ),
@@ -66,21 +49,17 @@ class ProfilePage extends StatelessWidget {
               onPressed: () => Navigator.pop(context),
             ),
           ),
-          const SizedBox(height: 12),
-
-          /// PROFILE IMAGE (fallback icon)
+          const SizedBox(height: 8),
           CircleAvatar(
             radius: 48,
             backgroundColor: Colors.red.shade700,
             child: const Icon(
               Icons.broken_image,
-              color: Colors.white,
               size: 40,
+              color: Colors.white,
             ),
           ),
-
           const SizedBox(height: 12),
-
           const Text(
             'DANDY CANDRA PRATAMA',
             style: TextStyle(
@@ -104,36 +83,54 @@ class ProfilePage extends StatelessWidget {
           color: Colors.white,
           borderRadius: BorderRadius.circular(12),
           boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.1),
-              blurRadius: 6,
-            ),
+            BoxShadow(color: Colors.black.withOpacity(0.1), blurRadius: 6),
           ],
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: const [
-            _TabItem(label: 'About Me', active: true),
-            _TabItem(label: 'Kelas'),
-            _TabItem(label: 'Edit Profile'),
+          children: [
+            _TabItem(
+              label: 'About Me',
+              active: _activeTab == 0,
+              onTap: () => setState(() => _activeTab = 0),
+            ),
+            _TabItem(
+              label: 'Kelas',
+              active: _activeTab == 1,
+              onTap: () => setState(() => _activeTab = 1),
+            ),
+            _TabItem(
+              label: 'Edit Profile',
+              active: _activeTab == 2,
+              onTap: () => setState(() => _activeTab = 2),
+            ),
           ],
         ),
       ),
     );
   }
 
-  // ================= INFORMASI USER =================
-  Widget _infoUser() {
+  // ================= TAB CONTENT =================
+  Widget _tabContent() {
+    switch (_activeTab) {
+      case 0:
+        return _aboutMe();
+      case 1:
+        return _kelasList();
+      case 2:
+        return _editProfilePlaceholder();
+      default:
+        return const SizedBox();
+    }
+  }
+
+  // ================= ABOUT ME =================
+  Widget _aboutMe() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: const [
-          Text(
-            'Informasi User',
-            style: TextStyle(fontWeight: FontWeight.bold),
-          ),
-          SizedBox(height: 12),
           _InfoItem(
             title: 'Email address',
             value: 'dandycandra@365.telkomuniversity.ac.id',
@@ -142,61 +139,104 @@ class ProfilePage extends StatelessWidget {
             title: 'Program Studi',
             value: 'D4 Teknologi Rekayasa Multimedia',
           ),
-          _InfoItem(
-            title: 'Fakultas',
-            value: 'FIT',
-          ),
+          _InfoItem(title: 'Fakultas', value: 'FIT'),
         ],
       ),
     );
   }
 
-  // ================= LOGIN ACTIVITY =================
-  Widget _loginActivity() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: const [
-          Text(
-            'Aktivitas Login',
-            style: TextStyle(fontWeight: FontWeight.bold),
-          ),
-          SizedBox(height: 12),
-          _InfoItem(
-            title: 'First access to site',
-            value: 'Monday, 7 September 2020, 9:27 AM (288 days 12 hours)',
-          ),
-          _InfoItem(
-            title: 'Last access to site',
-            value: 'Tuesday, 22 June 2021, 9:44 PM (now)',
-          ),
-        ],
-      ),
+  // ================= KELAS LIST =================
+  Widget _kelasList() {
+    return Column(
+      children: [
+        _kelasItem(
+          'BAHASA INGGRIS: BUSINESS AND SCIENTIFIC',
+          'D4SM-41-GABI [ARS]',
+        ),
+        _kelasItem(
+          'DESAIN ANTARMUKA & PENGALAMAN PENGGUNA',
+          'D4SM-42-03 [ADY]',
+        ),
+        _kelasItem('KEWARGANEGARAAN', 'D4SM-41-GABI [BBO]'),
+        _kelasItem('OLAH RAGA', 'D3TT-44-02 [EYR]'),
+        _kelasItem('PEMROGRAMAN MULTIMEDIA INTERAKTIF', 'D4SM-43-04 [TPR]'),
+        _kelasItem(
+          'PEMROGRAMAN PERANGKAT BERGERAK MULTIMEDIA',
+          'D4SM-41-GABI [APJ]',
+        ),
+        _kelasItem('SISTEM OPERASI', 'D4SM-44-02 [DDS]'),
+      ],
     );
   }
 
-  // ================= LOGOUT =================
-  Widget _logoutButton() {
+  Widget _kelasItem(String title, String subtitle) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: Align(
-        alignment: Alignment.centerRight,
-        child: ElevatedButton.icon(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: primaryRed,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+      child: Row(
+        children: [
+          Container(
+            width: 56,
+            height: 36,
+            decoration: BoxDecoration(
+              color: Colors.lightBlue.shade300,
+              borderRadius: BorderRadius.circular(18),
             ),
           ),
-          onPressed: () {},
-          icon: const Icon(Icons.logout, color: Colors.white),
-          label: const Text(
-            'Log Out',
-            style: TextStyle(color: Colors.white),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 2),
+                Text(
+                  subtitle,
+                  style: const TextStyle(fontSize: 12, color: Colors.grey),
+                ),
+                const SizedBox(height: 2),
+                const Text(
+                  'Tanggal Mulai Monday, 8 February 2021',
+                  style: TextStyle(fontSize: 11, color: Colors.grey),
+                ),
+              ],
+            ),
           ),
+        ],
+      ),
+    );
+  }
+
+  // ================= EDIT PROFILE =================
+  Widget _editProfilePlaceholder() {
+    return const Padding(
+      padding: EdgeInsets.all(24),
+      child: Center(
+        child: Text(
+          'Edit Profile (Coming Soon)',
+          style: TextStyle(color: Colors.grey),
         ),
       ),
+    );
+  }
+
+  // ================= BOTTOM NAV =================
+  Widget _bottomNav() {
+    return BottomNavigationBar(
+      currentIndex: 0,
+      backgroundColor: primaryRed,
+      selectedItemColor: Colors.white,
+      unselectedItemColor: Colors.white70,
+      items: const [
+        BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+        BottomNavigationBarItem(icon: Icon(Icons.school), label: 'Kelas Saya'),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.notifications),
+          label: 'Notifikasi',
+        ),
+      ],
     );
   }
 }
@@ -206,30 +246,30 @@ class ProfilePage extends StatelessWidget {
 class _TabItem extends StatelessWidget {
   final String label;
   final bool active;
+  final VoidCallback onTap;
 
   const _TabItem({
     required this.label,
-    this.active = false,
+    required this.active,
+    required this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text(
-          label,
-          style: TextStyle(
-            fontWeight: active ? FontWeight.bold : FontWeight.normal,
+    return GestureDetector(
+      onTap: onTap,
+      child: Column(
+        children: [
+          Text(
+            label,
+            style: TextStyle(
+              fontWeight: active ? FontWeight.bold : FontWeight.normal,
+            ),
           ),
-        ),
-        const SizedBox(height: 4),
-        if (active)
-          Container(
-            width: 24,
-            height: 2,
-            color: Colors.grey,
-          ),
-      ],
+          const SizedBox(height: 4),
+          if (active) Container(width: 24, height: 2, color: Colors.grey),
+        ],
+      ),
     );
   }
 }
@@ -238,10 +278,7 @@ class _InfoItem extends StatelessWidget {
   final String title;
   final String value;
 
-  const _InfoItem({
-    required this.title,
-    required this.value,
-  });
+  const _InfoItem({required this.title, required this.value});
 
   @override
   Widget build(BuildContext context) {
@@ -250,20 +287,9 @@ class _InfoItem extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            title,
-            style: const TextStyle(
-              color: Colors.grey,
-              fontSize: 12,
-            ),
-          ),
+          Text(title, style: const TextStyle(color: Colors.grey, fontSize: 12)),
           const SizedBox(height: 4),
-          Text(
-            value,
-            style: const TextStyle(
-              fontWeight: FontWeight.w500,
-            ),
-          ),
+          Text(value, style: const TextStyle(fontWeight: FontWeight.w500)),
         ],
       ),
     );
