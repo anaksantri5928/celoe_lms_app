@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:celoe_lms_app/pages/tugas_detail_page.dart';
 
 class MateriKonsepUIDPage extends StatefulWidget {
   const MateriKonsepUIDPage({super.key});
@@ -52,10 +53,7 @@ class _MateriKonsepUIDPageState extends State<MateriKonsepUIDPage> {
       child: const Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            'Deskripsi',
-            style: TextStyle(fontWeight: FontWeight.bold),
-          ),
+          Text('Deskripsi', style: TextStyle(fontWeight: FontWeight.bold)),
           SizedBox(height: 8),
           Text(
             'Konsep dasar User Interface Design akan dipelajari bagaimana '
@@ -113,7 +111,7 @@ class _MateriKonsepUIDPageState extends State<MateriKonsepUIDPage> {
   Widget _tugasDanKuisTab() {
     return ListView(
       padding: const EdgeInsets.all(16),
-      children: const [
+      children: [
         _TugasKuisDetailCard(
           isQuiz: true,
           title: 'Quiz Review 01',
@@ -124,17 +122,25 @@ class _MateriKonsepUIDPageState extends State<MateriKonsepUIDPage> {
               'Kerjakan sebelum hari Jumat, 26 Februari 2021 jam 23:59 WIB.',
           done: true,
         ),
-        _TugasKuisDetailCard(
-          isQuiz: false,
-          title: 'Tugas 01 – UID Android Mobile Game',
-          description:
-              '1. Buatlah desain tampilan (antarmuka) pada aplikasi mobile '
-              'game FPS (First Person Shooter) yang akan menjadi tugas '
-              'pada mata kuliah Pemrograman Aplikasi Permainan.\n'
-              '2. Desain yang dibuat harus melengkapi seluruh tampilan '
-              'pada aplikasi/game, dari pertama kali aplikasi dijalankan '
-              'hingga proses utama permainan.',
-          done: false,
+        GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const TugasDetailPage()),
+            );
+          },
+          child: _TugasKuisDetailCard(
+            isQuiz: false,
+            title: 'Tugas 01 – UID Android Mobile Game',
+            description:
+                '1. Buatlah desain tampilan (antarmuka) pada aplikasi mobile '
+                'game FPS (First Person Shooter) yang akan menjadi tugas '
+                'pada mata kuliah Pemrograman Aplikasi Permainan.\n'
+                '2. Desain yang dibuat harus melengkapi seluruh tampilan '
+                'pada aplikasi/game, dari pertama kali aplikasi dijalankan '
+                'hingga proses utama permainan.',
+            done: false,
+          ),
         ),
       ],
     );
@@ -166,12 +172,7 @@ class _TabButton extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 4),
-          if (active)
-            Container(
-              width: 36,
-              height: 2,
-              color: Colors.black,
-            ),
+          if (active) Container(width: 36, height: 2, color: Colors.black),
         ],
       ),
     );
@@ -228,15 +229,11 @@ class _TugasKuisDetailCard extends StatelessWidget {
                       Expanded(
                         child: Text(
                           title,
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                          ),
+                          style: const TextStyle(fontWeight: FontWeight.bold),
                         ),
                       ),
                       Icon(
-                        done
-                            ? Icons.check_circle
-                            : Icons.check_circle_outline,
+                        done ? Icons.check_circle : Icons.check_circle_outline,
                         color: done ? Colors.green : Colors.grey,
                       ),
                     ],
@@ -247,10 +244,7 @@ class _TugasKuisDetailCard extends StatelessWidget {
                   /// DESCRIPTION
                   Text(
                     description,
-                    style: const TextStyle(
-                      fontSize: 12,
-                      height: 1.4,
-                    ),
+                    style: const TextStyle(fontSize: 12, height: 1.4),
                   ),
                 ],
               ),
