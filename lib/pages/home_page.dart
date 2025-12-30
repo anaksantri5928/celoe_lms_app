@@ -3,6 +3,7 @@ import 'package:celoe_lms_app/pages/profile_page.dart';
 import 'package:celoe_lms_app/pages/kelas_saya_page.dart';
 import 'package:celoe_lms_app/pages/notifikasi_page.dart';
 import 'package:celoe_lms_app/pages/pengumuman_page.dart';
+import 'package:celoe_lms_app/pages/kelas_dashboard_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -70,7 +71,7 @@ class HomePage extends StatelessWidget {
 
             /// PROGRES
             _sectionTitle('Progres Kelas'),
-            _progressList(),
+            _progressList(context),
 
             const SizedBox(height: 32),
           ],
@@ -243,10 +244,18 @@ class HomePage extends StatelessWidget {
   }
 
   // ================= PROGRESS LIST =================
-  Widget _progressList() {
+  Widget _progressList(BuildContext context) {
     return Column(
       children: [
-        _progressItem('DESAIN ANTARMUKA & PENGALAMAN PENGGUNA', 0.89),
+        GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => const KelasDashboardPage()),
+            );
+          },
+          child: _progressItem('DESAIN ANTARMUKA & PENGALAMAN PENGGUNA', 0.89),
+        ),
         _progressItem('KEWARGANEGARAAN', 0.86),
         _progressItem('SISTEM OPERASI', 0.90),
         _progressItem('PEMROGRAMAN PERANGKAT BERGERAK MULTIMEDIA', 0.90),
