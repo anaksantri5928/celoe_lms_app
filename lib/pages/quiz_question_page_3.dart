@@ -1,24 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:celoe_lms_app/pages/quiz_question_page_3.dart';
 
-class QuizQuestionPage2 extends StatefulWidget {
-  const QuizQuestionPage2({super.key});
+class QuizQuestionPage3 extends StatefulWidget {
+  const QuizQuestionPage3({super.key});
 
   @override
-  State<QuizQuestionPage2> createState() => _QuizQuestionPage2State();
+  State<QuizQuestionPage3> createState() => _QuizQuestionPage3State();
 }
 
-class _QuizQuestionPage2State extends State<QuizQuestionPage2> {
+class _QuizQuestionPage3State extends State<QuizQuestionPage3> {
   static const primaryRed = Color(0xFFB71C1C);
 
-  int? selectedOption = 2; // C. Konsistensi
+  int? selectedOption = 0; // A. Jenis Kelamin (contoh terpilih)
 
   final List<String> options = [
-    'Integrasi',
-    'Standarisasi',
-    'Konsistensi',
-    'Koefensi',
-    'Koreksi',
+    'Jenis Kelamin',
+    'Alamat',
+    'Hobby',
+    'Riwayat Pendidikan',
+    'Umur',
   ];
 
   @override
@@ -31,7 +30,10 @@ class _QuizQuestionPage2State extends State<QuizQuestionPage2> {
         backgroundColor: primaryRed,
         elevation: 0,
         centerTitle: true,
-        title: const Text('Quiz Review 1', style: TextStyle(fontSize: 14)),
+        title: const Text(
+          'Quiz Review 1',
+          style: TextStyle(fontSize: 14),
+        ),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 16),
@@ -39,7 +41,10 @@ class _QuizQuestionPage2State extends State<QuizQuestionPage2> {
               children: const [
                 Icon(Icons.alarm, size: 18),
                 SizedBox(width: 4),
-                Text('15 : 00', style: TextStyle(fontWeight: FontWeight.bold)),
+                Text(
+                  '15 : 00',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
               ],
             ),
           ),
@@ -54,14 +59,14 @@ class _QuizQuestionPage2State extends State<QuizQuestionPage2> {
             _questionNavigation(),
             const SizedBox(height: 20),
             const Text(
-              'Soal Nomor 2 / 15',
+              'Soal Nomor 3 / 15',
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 32),
             const Text(
-              'Dalam perancangan web yang baik, untuk teks yang '
-              'menyampaikan isi konten digunakan font yang sama di '
-              'setiap halaman, ini merupakan salah satu tujuan yaitu ?',
+              'Dalam perancangan web yang baik, untuk teks yang menyampaikan '
+              'isi konten digunakan font yang sama di setiap halaman, '
+              'ini merupakan salah satu tujuan yaitu ?',
               style: TextStyle(fontSize: 14),
             ),
             const SizedBox(height: 24),
@@ -81,9 +86,12 @@ class _QuizQuestionPage2State extends State<QuizQuestionPage2> {
       child: ListView(
         scrollDirection: Axis.horizontal,
         children: [
-          _numberCircle(1, Colors.green), // sudah selesai
-          _numberCircle(2, primaryRed), // aktif
-          for (int i = 3; i <= 15; i++) _numberCircle(i, Colors.white),
+          // Nomor 1–14 = selesai (HIJAU)
+          for (int i = 1; i <= 14; i++)
+            _numberCircle(i, Colors.green),
+
+          // Nomor 15 = step akhir / submit (MERAH)
+          _numberCircle(15, primaryRed),
         ],
       ),
     );
@@ -110,7 +118,7 @@ class _QuizQuestionPage2State extends State<QuizQuestionPage2> {
     );
   }
 
-  // ================= PILIHAN =================
+  // ================= PILIHAN JAWABAN =================
   List<Widget> _buildOptions() {
     return List.generate(options.length, (index) {
       final isSelected = selectedOption == index;
@@ -167,19 +175,20 @@ class _QuizQuestionPage2State extends State<QuizQuestionPage2> {
           ),
           child: const Text('Soal Sebelumnya'),
         ),
-        OutlinedButton(
+        ElevatedButton(
           onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (_) => const QuizQuestionPage3()),
-            );
+            // TODO: navigasi ke halaman submit / hasil kuis
           },
-          style: OutlinedButton.styleFrom(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.green,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16),
             ),
           ),
-          child: const Text('Soal Selanjutnya'),
+          child: const Text(
+            'Selesai',
+            style: TextStyle(color: Colors.white),
+          ),
         ),
       ],
     );
