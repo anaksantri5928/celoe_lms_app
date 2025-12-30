@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:celoe_lms_app/widgets/upload_file_bottom_sheet.dart';
 
 class TugasDetailPage extends StatelessWidget {
   const TugasDetailPage({super.key});
@@ -31,7 +32,7 @@ class TugasDetailPage extends StatelessWidget {
           const SizedBox(height: 16),
           _statusCard(),
           const SizedBox(height: 16),
-          _submitButton(),
+          _submitButton(context),
         ],
       ),
     );
@@ -75,16 +76,11 @@ class TugasDetailPage extends StatelessWidget {
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
             color: Colors.red.shade400,
-            borderRadius: const BorderRadius.vertical(
-              top: Radius.circular(12),
-            ),
+            borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
           ),
           child: const Text(
             'Status Tugas',
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-            ),
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
           ),
         ),
         Container(
@@ -101,10 +97,7 @@ class TugasDetailPage extends StatelessWidget {
                 label: 'Status',
                 value: 'Sudah Mengirim untuk di nilai',
               ),
-              _StatusRow(
-                label: 'Status Nilai',
-                value: 'Belum Di nilai',
-              ),
+              _StatusRow(label: 'Status Nilai', value: 'Belum Di nilai'),
               _StatusRow(
                 label: 'Batas tanggal',
                 value: 'Jumat, 26 Februari 2021, 23:59 WIB',
@@ -113,9 +106,7 @@ class TugasDetailPage extends StatelessWidget {
                 label: 'Sisa Waktu',
                 value: 'Tugas sudah di kirim 4 hari 6 jam sebelum nya',
               ),
-              _FileRow(
-                filename: 'Dandy Candra Pratama_770817014.pdf',
-              ),
+              _FileRow(filename: 'Dandy Candra Pratama_770817014.pdf'),
             ],
           ),
         ),
@@ -124,10 +115,20 @@ class TugasDetailPage extends StatelessWidget {
   }
 
   // ================= SUBMIT BUTTON =================
-  Widget _submitButton() {
+  Widget _submitButton(BuildContext context) {
     return Center(
       child: OutlinedButton(
-        onPressed: () {},
+        onPressed: () {
+          showModalBottomSheet(
+            context: context,
+            isScrollControlled: true,
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+            ),
+            builder: (_) => const UploadFileBottomSheet(),
+          );
+        },
+
         style: OutlinedButton.styleFrom(
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
           shape: RoundedRectangleBorder(
@@ -152,10 +153,7 @@ class _StatusRow extends StatelessWidget {
   final String label;
   final String value;
 
-  const _StatusRow({
-    required this.label,
-    required this.value,
-  });
+  const _StatusRow({required this.label, required this.value});
 
   @override
   Widget build(BuildContext context) {
@@ -171,12 +169,7 @@ class _StatusRow extends StatelessWidget {
               style: const TextStyle(color: Colors.grey, fontSize: 12),
             ),
           ),
-          Expanded(
-            child: Text(
-              value,
-              style: const TextStyle(fontSize: 12),
-            ),
-          ),
+          Expanded(child: Text(value, style: const TextStyle(fontSize: 12))),
         ],
       ),
     );
@@ -187,9 +180,7 @@ class _StatusRow extends StatelessWidget {
 class _FileRow extends StatelessWidget {
   final String filename;
 
-  const _FileRow({
-    required this.filename,
-  });
+  const _FileRow({required this.filename});
 
   @override
   Widget build(BuildContext context) {
@@ -197,12 +188,7 @@ class _FileRow extends StatelessWidget {
       children: [
         const Icon(Icons.insert_drive_file_outlined, size: 18),
         const SizedBox(width: 8),
-        Expanded(
-          child: Text(
-            filename,
-            style: const TextStyle(fontSize: 12),
-          ),
-        ),
+        Expanded(child: Text(filename, style: const TextStyle(fontSize: 12))),
       ],
     );
   }
