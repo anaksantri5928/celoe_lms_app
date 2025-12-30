@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:celoe_lms_app/pages/quiz_review_page.dart';
 
 class QuizQuestionPage3 extends StatefulWidget {
   const QuizQuestionPage3({super.key});
@@ -30,10 +31,7 @@ class _QuizQuestionPage3State extends State<QuizQuestionPage3> {
         backgroundColor: primaryRed,
         elevation: 0,
         centerTitle: true,
-        title: const Text(
-          'Quiz Review 1',
-          style: TextStyle(fontSize: 14),
-        ),
+        title: const Text('Quiz Review 1', style: TextStyle(fontSize: 14)),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 16),
@@ -41,10 +39,7 @@ class _QuizQuestionPage3State extends State<QuizQuestionPage3> {
               children: const [
                 Icon(Icons.alarm, size: 18),
                 SizedBox(width: 4),
-                Text(
-                  '15 : 00',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
+                Text('15 : 00', style: TextStyle(fontWeight: FontWeight.bold)),
               ],
             ),
           ),
@@ -87,8 +82,7 @@ class _QuizQuestionPage3State extends State<QuizQuestionPage3> {
         scrollDirection: Axis.horizontal,
         children: [
           // Nomor 1–14 = selesai (HIJAU)
-          for (int i = 1; i <= 14; i++)
-            _numberCircle(i, Colors.green),
+          for (int i = 1; i <= 14; i++) _numberCircle(i, Colors.green),
 
           // Nomor 15 = step akhir / submit (MERAH)
           _numberCircle(15, primaryRed),
@@ -177,7 +171,10 @@ class _QuizQuestionPage3State extends State<QuizQuestionPage3> {
         ),
         ElevatedButton(
           onPressed: () {
-            // TODO: navigasi ke halaman submit / hasil kuis
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => const QuizReviewPage()),
+            );
           },
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.green,
@@ -185,10 +182,7 @@ class _QuizQuestionPage3State extends State<QuizQuestionPage3> {
               borderRadius: BorderRadius.circular(16),
             ),
           ),
-          child: const Text(
-            'Selesai',
-            style: TextStyle(color: Colors.white),
-          ),
+          child: const Text('Selesai', style: TextStyle(color: Colors.white)),
         ),
       ],
     );
