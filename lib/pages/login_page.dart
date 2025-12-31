@@ -12,6 +12,8 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   bool _obscurePassword = true;
 
+  static const primaryRed = Color(0xFFB74848);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,7 +46,7 @@ class _LoginPageState extends State<LoginPage> {
             child: Center(
               child: CircleAvatar(
                 radius: 32,
-                backgroundColor: const Color(0xFFB74848),
+                backgroundColor: primaryRed,
                 child: const Icon(
                   Icons.lock_outline,
                   color: Colors.white,
@@ -82,10 +84,7 @@ class _LoginPageState extends State<LoginPage> {
                         decoration: InputDecoration(
                           labelText: 'Email 365',
                           focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Color(0xFFB74848),
-                              width: 2,
-                            ),
+                            borderSide: BorderSide(color: primaryRed, width: 2),
                           ),
                         ),
                       ),
@@ -98,10 +97,7 @@ class _LoginPageState extends State<LoginPage> {
                         decoration: InputDecoration(
                           labelText: 'Password',
                           focusedBorder: const UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Color(0xFFB74848),
-                              width: 2,
-                            ),
+                            borderSide: BorderSide(color: primaryRed, width: 2),
                           ),
                           suffixIcon: IconButton(
                             icon: Icon(
@@ -126,16 +122,16 @@ class _LoginPageState extends State<LoginPage> {
                         height: 48,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0xFFB74848),
+                            backgroundColor: primaryRed,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(24),
                             ),
                           ),
                           onPressed: () {
-                            Navigator.push(
+                            Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const HomePage(),
+                                builder: (_) => const HomePage(),
                               ),
                             );
                           },
@@ -158,12 +154,12 @@ class _LoginPageState extends State<LoginPage> {
                           },
                           child: const Text(
                             'Bantuan ?',
-                            style: TextStyle(color: Color(0xFFB74848)),
+                            style: TextStyle(color: primaryRed),
                           ),
                         ),
                       ),
 
-                      const SizedBox(height: 120),
+                      const SizedBox(height: 140),
                     ],
                   ),
                 ),
@@ -171,14 +167,14 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ),
 
-          /// BOTTOM RED WAVE
+          /// BOTTOM RED WAVE (FIXED)
           Positioned(
             bottom: 0,
             left: 0,
             right: 0,
             child: ClipPath(
               clipper: BottomWaveClipper(),
-              child: Container(height: 140, color: const Color(0xFFB74848)),
+              child: Container(height: 160, color: primaryRed),
             ),
           ),
         ],
@@ -187,14 +183,18 @@ class _LoginPageState extends State<LoginPage> {
   }
 }
 
+/// ================= TOP WAVE =================
 class TopWaveClipper extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
-    Path path = Path();
-    path.lineTo(0, 40);
-    path.quadraticBezierTo(size.width / 2, 0, size.width, 40);
+    final path = Path();
+
+    path.moveTo(0, 40);
+    path.quadraticBezierTo(size.width * 0.5, 0, size.width, 40);
     path.lineTo(size.width, size.height);
     path.lineTo(0, size.height);
+    path.close();
+
     return path;
   }
 
@@ -202,14 +202,34 @@ class TopWaveClipper extends CustomClipper<Path> {
   bool shouldReclip(CustomClipper<Path> oldClipper) => false;
 }
 
+/// ================= BOTTOM WAVE (REAL WAVE) =================
 class BottomWaveClipper extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
-    Path path = Path();
-    path.moveTo(0, 80);
-    path.quadraticBezierTo(size.width / 2, 0, size.width, 40);
+    final path = Path();
+
+    path.moveTo(0, size.height * 0.35);
+
+    // Wave naik
+    path.quadraticBezierTo(
+      size.width * 0.25,
+      size.height * 0.15,
+      size.width * 0.5,
+      size.height * 0.35,
+    );
+
+    // Wave turun
+    path.quadraticBezierTo(
+      size.width * 0.75,
+      size.height * 0.55,
+      size.width,
+      size.height * 0.35,
+    );
+
     path.lineTo(size.width, size.height);
     path.lineTo(0, size.height);
+    path.close();
+
     return path;
   }
 
