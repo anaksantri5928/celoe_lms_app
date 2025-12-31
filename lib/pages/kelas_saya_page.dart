@@ -28,43 +28,56 @@ class KelasSayaPage extends StatelessWidget {
       ),
 
       /// BODY
-      body: ListView(
-        padding: const EdgeInsets.only(bottom: 100),
+      body: Column(
         children: [
-          _kelasItem(
-            title: 'DESAIN ANTARMUKA & PENGALAMAN PENGGUNA',
-            subtitle: 'D4SM-42-03 [ADY]',
-            progress: 0.89,
-          ),
-          _kelasItem(
-            title: 'KEWARGANEGARAAN',
-            subtitle: 'D4SM-41-GABI [BBO]. JUMAT 2',
-            progress: 0.86,
-          ),
-          _kelasItem(
-            title: 'SISTEM OPERASI',
-            subtitle: 'D4SM-44-02 [DDS]',
-            progress: 0.90,
-          ),
-          _kelasItem(
-            title: 'PEMROGRAMAN PERANGKAT BERGERAK MULTIMEDIA',
-            subtitle: 'D4SM-41-GABI [APJ]',
-            progress: 0.90,
-          ),
-          _kelasItem(
-            title: 'BAHASA INGGRIS: BUSINESS AND SCIENTIFIC',
-            subtitle: 'D4SM-41-GABI [ARS]',
-            progress: 0.90,
-          ),
-          _kelasItem(
-            title: 'PEMROGRAMAN MULTIMEDIA INTERAKTIF',
-            subtitle: 'D4SM-43-04 [TPR]',
-            progress: 0.90,
-          ),
-          _kelasItem(
-            title: 'OLAH RAGA',
-            subtitle: 'D3TT-44-02 [EYR]',
-            progress: 0.90,
+          Expanded(
+            child: ListView(
+              padding: const EdgeInsets.only(bottom: 100),
+              children: [
+                _kelasItem(
+                  title: 'DESAIN ANTARMUKA & PENGALAMAN PENGGUNA',
+                  subtitle: 'D4SM-42-03 [ADY]',
+                  progress: 0.89,
+                  imagePath: 'assets/design_pengalaman_antar_muka_pengguna.png',
+                ),
+                _kelasItem(
+                  title: 'KEWARGANEGARAAN',
+                  subtitle: 'D4SM-41-GABI [BBO]. JUMAT 2',
+                  progress: 0.86,
+                  imagePath: 'assets/kewarganegaraan.png',
+                ),
+                _kelasItem(
+                  title: 'SISTEM OPERASI',
+                  subtitle: 'D4SM-44-02 [DDS]',
+                  progress: 0.90,
+                  imagePath: 'assets/sistem_operasi.png',
+                ),
+                _kelasItem(
+                  title: 'PEMROGRAMAN PERANGKAT BERGERAK MULTIMEDIA',
+                  subtitle: 'D4SM-41-GABI [APJ]',
+                  progress: 0.90,
+                  imagePath: 'assets/multimedia.png',
+                ),
+                _kelasItem(
+                  title: 'BAHASA INGGRIS: BUSINESS AND SCIENTIFIC',
+                  subtitle: 'D4SM-41-GABI [ARS]',
+                  progress: 0.90,
+                  imagePath: 'bahasa_inggris.png',
+                ),
+                _kelasItem(
+                  title: 'PEMROGRAMAN MULTIMEDIA INTERAKTIF',
+                  subtitle: 'D4SM-43-04 [TPR]',
+                  progress: 0.90,
+                  imagePath: 'assets/pemrograman_multimedia.png',
+                ),
+                _kelasItem(
+                  title: 'OLAH RAGA',
+                  subtitle: 'D3TT-44-02 [EYR]',
+                  progress: 0.90,
+                  imagePath: 'assets/olahraga.png',
+                ),
+              ],
+            ),
           ),
         ],
       ),
@@ -120,6 +133,7 @@ class KelasSayaPage extends StatelessWidget {
     required String title,
     required String subtitle,
     required double progress,
+    required String imagePath,
   }) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
@@ -131,10 +145,12 @@ class KelasSayaPage extends StatelessWidget {
             width: 80,
             height: 80,
             decoration: BoxDecoration(
-              color: Colors.grey.shade200,
               borderRadius: BorderRadius.circular(8),
+              image: DecorationImage(
+                image: AssetImage(imagePath),
+                fit: BoxFit.cover,
+              ),
             ),
-            child: const Icon(Icons.broken_image, size: 40, color: Colors.grey),
           ),
 
           const SizedBox(width: 12),
