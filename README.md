@@ -85,15 +85,3 @@ Untuk berkontribusi pada proyek ini:
 3. Commit perubahan (`git commit -m 'Add some AmazingFeature'`)
 4. Push ke branch (`git push origin feature/AmazingFeature`)
 5. Buat Pull Request
-
-## Lisensi
-
-Proyek ini menggunakan lisensi MIT. Lihat file `LICENSE` untuk detail lebih lanjut.
-
-## Kontak
-
-Untuk pertanyaan atau dukungan, hubungi tim CeLOE Telkom University.
-
----
-
-Dikembangkan dengan ❤️ oleh Tim CeLOE Telkom University
