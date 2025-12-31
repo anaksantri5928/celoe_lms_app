@@ -58,11 +58,11 @@ class PengumumanDetailPage extends StatelessWidget {
               height: 160,
               width: double.infinity,
               decoration: BoxDecoration(
-                color: Colors.grey.shade200,
                 borderRadius: BorderRadius.circular(12),
-              ),
-              child: const Center(
-                child: Icon(Icons.broken_image, size: 48, color: Colors.grey),
+                image: const DecorationImage(
+                  image: AssetImage('assets/gambar_pengumuman.png'),
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
 
