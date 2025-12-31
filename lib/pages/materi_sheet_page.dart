@@ -52,10 +52,7 @@ class _MateriSheetPageState extends State<MateriSheetPage> {
       child: const Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            'Deskripsi',
-            style: TextStyle(fontWeight: FontWeight.bold),
-          ),
+          Text('Deskripsi', style: TextStyle(fontWeight: FontWeight.bold)),
           SizedBox(height: 8),
           Text(
             'Antarmuka yang dibangun harus memperhatikan prinsip-prinsip '
@@ -102,10 +99,20 @@ class _MateriSheetPageState extends State<MateriSheetPage> {
     if (_activeTab == 0) {
       return _lampiranMateriTab();
     }
-    return const Center(
-      child: Text(
-        'Tugas dan Kuis (Coming Soon)',
-        style: TextStyle(color: Colors.grey),
+    return Center(
+      child: Column(
+        children: [
+          Image.asset(
+            'assets/happy-lying-girl-character.png',
+            width: 200,
+            height: 200,
+          ),
+          SizedBox(height: 16),
+          Text(
+            'Tugas dan Kuis (Coming Soon)',
+            style: TextStyle(color: Colors.grey),
+          ),
+        ],
       ),
     );
   }
@@ -140,11 +147,7 @@ class _MateriSheetPageState extends State<MateriSheetPage> {
           title: 'User Interface Design for Beginner',
           done: true,
         ),
-        _LampiranItem(
-          icon: Icons.link,
-          title: '20 Prinsip Desain',
-          done: true,
-        ),
+        _LampiranItem(icon: Icons.link, title: '20 Prinsip Desain', done: true),
         _LampiranItem(
           icon: Icons.link,
           title: 'Best Practice UI Design',
@@ -180,12 +183,7 @@ class _TabButton extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 4),
-          if (active)
-            Container(
-              width: 36,
-              height: 2,
-              color: Colors.black,
-            ),
+          if (active) Container(width: 36, height: 2, color: Colors.black),
         ],
       ),
     );
@@ -217,12 +215,7 @@ class _LampiranItem extends StatelessWidget {
         children: [
           Icon(icon, size: 20),
           const SizedBox(width: 12),
-          Expanded(
-            child: Text(
-              title,
-              style: const TextStyle(fontSize: 13),
-            ),
-          ),
+          Expanded(child: Text(title, style: const TextStyle(fontSize: 13))),
           Icon(
             done ? Icons.check_circle : Icons.check_circle_outline,
             color: done ? Colors.green : Colors.grey,
