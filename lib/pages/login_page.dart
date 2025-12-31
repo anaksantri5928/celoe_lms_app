@@ -18,16 +18,17 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
+      resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
-          /// HEADER IMAGE
+          /// ================= HEADER IMAGE =================
           SizedBox(
             height: 300,
             width: double.infinity,
             child: Image.asset('assets/header.jpg', fit: BoxFit.cover),
           ),
 
-          /// WHITE CURVE OVER IMAGE
+          /// ================= WHITE TOP WAVE =================
           Positioned(
             top: 220,
             left: 0,
@@ -38,7 +39,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ),
 
-          /// LOGO (FLOATING)
+          /// ================= FLOATING LOGO =================
           Positioned(
             top: 250,
             left: 0,
@@ -56,16 +57,17 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ),
 
-          /// FORM CONTENT
-          SingleChildScrollView(
-            child: Column(
-              children: [
-                const SizedBox(height: 300),
-
-                Padding(
+          /// ================= FORM CONTENT =================
+          Align(
+            alignment: Alignment.topCenter,
+            child: SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.only(top: 300),
+                child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
                     children: [
                       const SizedBox(height: 32),
 
@@ -159,22 +161,21 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
 
-                      const SizedBox(height: 140),
+                      /// JARAK AMAN DARI RED WAVE
+                      const Spacer(),
                     ],
                   ),
                 ),
-              ],
+              ),
             ),
           ),
 
-          /// BOTTOM RED WAVE (FIXED)
-          Positioned(
-            bottom: 0,
-            left: 0,
-            right: 0,
+          /// ================= BOTTOM RED WAVE =================
+          Align(
+            alignment: Alignment.bottomCenter,
             child: ClipPath(
               clipper: BottomWaveClipper(),
-              child: Container(height: 160, color: primaryRed),
+              child: Container(height: 140, color: primaryRed),
             ),
           ),
         ],
@@ -183,7 +184,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 }
 
-/// ================= TOP WAVE =================
+/// ================= TOP WAVE CLIPPER =================
 class TopWaveClipper extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
@@ -202,7 +203,7 @@ class TopWaveClipper extends CustomClipper<Path> {
   bool shouldReclip(CustomClipper<Path> oldClipper) => false;
 }
 
-/// ================= BOTTOM WAVE (REAL WAVE) =================
+/// ================= BOTTOM WAVE CLIPPER =================
 class BottomWaveClipper extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
@@ -210,7 +211,6 @@ class BottomWaveClipper extends CustomClipper<Path> {
 
     path.moveTo(0, size.height * 0.35);
 
-    // Wave naik
     path.quadraticBezierTo(
       size.width * 0.25,
       size.height * 0.15,
@@ -218,7 +218,6 @@ class BottomWaveClipper extends CustomClipper<Path> {
       size.height * 0.35,
     );
 
-    // Wave turun
     path.quadraticBezierTo(
       size.width * 0.75,
       size.height * 0.55,
