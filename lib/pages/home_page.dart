@@ -265,19 +265,35 @@ class HomePage extends StatelessWidget {
               MaterialPageRoute(builder: (_) => const KelasDashboardPage()),
             );
           },
-          child: _progressItem('DESAIN ANTARMUKA & PENGALAMAN PENGGUNA', 0.89),
+          child: _progressItem(
+            'DESAIN ANTARMUKA & PENGALAMAN PENGGUNA',
+            0.89,
+            'assets/design_pengalaman_antar_muka_pengguna.png',
+          ),
         ),
-        _progressItem('KEWARGANEGARAAN', 0.86),
-        _progressItem('SISTEM OPERASI', 0.90),
-        _progressItem('PEMROGRAMAN PERANGKAT BERGERAK MULTIMEDIA', 0.90),
-        _progressItem('BAHASA INGGRIS: BUSINESS & SCIENTIFIC', 0.90),
-        _progressItem('PEMROGRAMAN MULTIMEDIA INTERAKTIF', 0.90),
-        _progressItem('OLAH RAGA', 0.90),
+        _progressItem('KEWARGANEGARAAN', 0.86, 'assets/kewarganegaraan.png'),
+        _progressItem('SISTEM OPERASI', 0.90, 'assets/sistem_operasi.png'),
+        _progressItem(
+          'PEMROGRAMAN PERANGKAT BERGERAK MULTIMEDIA',
+          0.90,
+          'assets/multimedia.png',
+        ),
+        _progressItem(
+          'BAHASA INGGRIS: BUSINESS & SCIENTIFIC',
+          0.90,
+          'assets/bahasa_inggris.png',
+        ),
+        _progressItem(
+          'PEMROGRAMAN MULTIMEDIA INTERAKTIF',
+          0.90,
+          'assets/pemrograman_multimedia.png',
+        ),
+        _progressItem('OLAH RAGA', 0.90, 'assets/olahraga.png'),
       ],
     );
   }
 
-  Widget _progressItem(String title, double progress) {
+  Widget _progressItem(String title, double progress, String imagePath) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Row(
@@ -287,8 +303,8 @@ class HomePage extends StatelessWidget {
             height: 64,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
-              image: const DecorationImage(
-                image: AssetImage('assets/header.jpg'),
+              image: DecorationImage(
+                image: AssetImage(imagePath),
                 fit: BoxFit.cover,
               ),
             ),
