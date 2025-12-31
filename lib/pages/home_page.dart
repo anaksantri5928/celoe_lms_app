@@ -173,7 +173,7 @@ class HomePage extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Container(
-        width: double.infinity, // ✅ INI KUNCI
+        width: double.infinity,
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           color: primaryRed,
@@ -244,11 +244,11 @@ class HomePage extends StatelessWidget {
       child: Container(
         height: 140,
         decoration: BoxDecoration(
-          color: Colors.grey.shade200,
           borderRadius: BorderRadius.circular(12),
-        ),
-        child: const Center(
-          child: Icon(Icons.image_not_supported, size: 48, color: Colors.grey),
+          image: const DecorationImage(
+            image: AssetImage('assets/gambar_pengumuman.png'),
+            fit: BoxFit.cover,
+          ),
         ),
       ),
     );
@@ -286,10 +286,12 @@ class HomePage extends StatelessWidget {
             width: 64,
             height: 64,
             decoration: BoxDecoration(
-              color: Colors.grey.shade300,
               borderRadius: BorderRadius.circular(8),
+              image: const DecorationImage(
+                image: AssetImage('assets/header.jpg'),
+                fit: BoxFit.cover,
+              ),
             ),
-            child: const Icon(Icons.broken_image),
           ),
           const SizedBox(width: 12),
           Expanded(
