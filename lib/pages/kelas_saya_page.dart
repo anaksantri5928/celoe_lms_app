@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:celoe_lms_app/pages/home_page.dart';
+import 'package:celoe_lms_app/pages/notifikasi_page.dart';
 
 class KelasSayaPage extends StatelessWidget {
   const KelasSayaPage({super.key});
@@ -68,22 +70,47 @@ class KelasSayaPage extends StatelessWidget {
       ),
 
       /// BOTTOM NAV
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: 1,
-        backgroundColor: primaryRed,
-        selectedItemColor: Colors.white,
-        unselectedItemColor: Colors.white70,
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.school),
-            label: 'Kelas Saya',
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+          color: primaryRed,
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(24),
+            topRight: Radius.circular(24),
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.notifications),
-            label: 'Notifikasi',
-          ),
-        ],
+          boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 8)],
+        ),
+        child: BottomNavigationBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          currentIndex: 1,
+          selectedItemColor: Colors.white,
+          unselectedItemColor: Colors.white70,
+          onTap: (index) {
+            if (index == 0) {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (_) => const HomePage()),
+              );
+            }
+            if (index == 2) {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (_) => const NotifikasiPage()),
+              );
+            }
+          },
+          items: const [
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.school),
+              label: 'Kelas Saya',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.notifications),
+              label: 'Notifikasi',
+            ),
+          ],
+        ),
       ),
     );
   }
